@@ -1,0 +1,35 @@
+{% extends "nav.html" %}
+{% block body_block %}
+<section class="home_banner_area">
+    <div class="container pt-3 mh-50">
+        <div class="bd-example">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                {% for image in images %}
+                {% if forloop.counter == 1 %}
+                <div class="carousel-item active">
+                {% else %}
+                <div class="carousel-item">
+                {% endif %}
+                    <img src="{{image}}" class="d-block w-100" style="height: 700px;" alt="...">
+                </div>
+                {% endfor %}
+                </div>
+                <ol class="carousel-indicators">
+                    {% for image in images %}
+                        {% if forloop.counter0 == 0 %}
+                            <li data-target="#carouselExampleCaptions" data-slide-to="{{forloop.counter0}}" class="active"></li>
+                        {% else %}
+                            <li data-target="#carouselExampleCaptions" data-slide-to="{{forloop.counter0}}"></li>
+                        {% endif %}
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %}
+
+{% block script_block %}
+{% endblock %}
