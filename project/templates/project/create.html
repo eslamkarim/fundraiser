@@ -1,0 +1,36 @@
+{% extends "nav.html" %}
+{% block body_block %}
+{% load widget_tweaks %}
+<section class="section_gap">
+<div class="container">
+<form enctype="multipart/form-data" action="{% url 'create' %}" method="post" >
+    {% csrf_token %}
+
+    {% for field in form %}
+      <div class="form-group">
+        {{ field.label_tag }}
+        {% if field.label == "Tags" %}
+          {% for o in field %}
+          <div class="custom-control custom-checkbox mb-3">
+            <input type="checkbox" name="tags" value="{{o.data.value}}" class="custom-control-input" id="{{ o.data.attrs.id }}" > 
+            <label class="custom-control-label" for="{{ o.data.attrs.id }}" >{{o.data.label}}</label> 
+            <br>
+          </div>
+          {% endfor %}
+
+        {% else %}
+        {% render_field field class="form-control" %}
+        {% endif %}
+        {{ field.errors }}
+      </div>
+    {% endfor %}
+    <div class="custom-file">
+      <input type="file" class="custom-file-input" id="validatedCustomFile" accept="image/png, image/jpeg" required  name="images" multiple>
+      <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+    </div>
+    <input type="submit"  class="btn btn-primary" value="Create Project" style="display:block;margin: auto;margin-top:30px;width:200px;background-color: green;border-color:green">
+</form>
+</div>
+</section>
+{% endblock %}
+
