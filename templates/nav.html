@@ -21,6 +21,10 @@
 	<!-- main css -->
 	<link rel="stylesheet" href="{{ STATIC_URL }} /static/css/style.css">
 	<link rel="stylesheet" href="{{ STATIC_URL }} /static/css/responsive.css">
+
+	{% block css_link_block %}
+
+    {% endblock %}
 </head>
 
 <body>
@@ -154,5 +158,7 @@
 	<script src="{{ STATIC_URL }} /static/vendors/nice-select/js/jquery.nice-select.min.js"></script>
 	<script src="{{ STATIC_URL }} /static/js/jquery.ajaxchimp.min.js"></script>
 	<script src="{{ STATIC_URL }} /static/js/custom.js"></script>
+	{% block js_link_block %}
+    {% endblock %}
 </body>
 </html>

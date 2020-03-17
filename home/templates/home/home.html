@@ -1,8 +1,42 @@
 {% extends "nav.html" %}
+
+{% block css_link_block %}
+
+	<link rel="stylesheet" href="{{ STATIC_URL }} /static/css/font-awesome.min.css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Mansalva|Roboto&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/animate.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/aos.css">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/style.css">
+{% endblock %}
+
 {% block body_block %}
-<section class="section_gap">
-    <h1>
-        this is home
-    </h1>
-</section>
+<!--<section class="section_gap">-->
+    {% include "home/header_section.html" %}
+<!--</section>-->
+{% endblock %}
+
+{% block js_link_block %}
+    <script src="{{ STATIC_URL }} /static/home/js/jquery-3.3.1.min.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/popper.min.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/owl.carousel.min.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/jquery.sticky.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/jquery.waypoints.min.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/jquery.animateNumber.min.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/jquery.fancybox.min.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/jquery.easing.1.3.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/aos.js"></script>
+
+    <script src="{{ STATIC_URL }} /static/home/js/main.js"></script>
 {% endblock %}

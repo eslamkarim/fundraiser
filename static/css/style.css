@@ -191,12 +191,7 @@ a {
   @media (max-width: 992px) {
     .owl-dots {
       display: none; } }
-  .owl-dots .owl-dot {
-    width: 14px;
-    height: 14px;
-    background: #eeeeee;
-    display: inline-block;
-    margin-right: 10px; }
+
     .owl-dots .owl-dot:last-child {
       margin-right: 0; }
     .owl-dots .owl-dot.active {
