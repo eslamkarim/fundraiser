@@ -320,8 +320,6 @@ a {
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
 .home_banner_area {
-  background: url(../img/banner/home.jpg) no-repeat center bottom;
-  position: relative;
   z-index: 1;
   height: 900px; }
   @media (max-width: 992px) {
@@ -369,9 +367,7 @@ a {
           background: #ea2c58;
           border: 1px solid #ea2c58; }
 
-.banner-area {
-  background: url(../img/banner/home.jpg) center;
-  background-size: cover; }
+
   .banner-area .primary-btn {
     padding-left: 30px;
     padding-right: 30px; }
