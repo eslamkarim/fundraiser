@@ -9,7 +9,7 @@ class DateInput(forms.DateInput):
 class ContactForm(forms.Form):
       project_title = forms.CharField(max_length=100, label='Project Title')
       details = forms.CharField(label='Project Details',widget=forms.Textarea)
-      category = forms.ModelChoiceField(queryset=Category.objects.all(),required=True,initial=Category.objects.all()[0])
+      category = forms.ModelChoiceField(queryset=Category.objects.all())
       target = forms.IntegerField(min_value=1,max_value=1000000000)
       tags = forms.ModelMultipleChoiceField(widget = forms.CheckboxSelectMultiple,queryset=Tag.objects.all())
       start_date = forms.DateField(widget=DateInput,initial=datetime.date.today,required=True)

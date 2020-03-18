@@ -11,6 +11,7 @@ class Project_data(models.Model):
   end_date = models.DateField()
   rating = models.IntegerField(default=3)
   reports = models.IntegerField(default=0)
+  current_money = models.IntegerField(default=0)
   
   def __str__(self):
     return self.title
