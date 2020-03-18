@@ -399,14 +399,14 @@ a {
 ============================================================================================ */
 .main_btn {
   display: inline-block;
-  background: #ea2c58;
+  background: #0275f0;
   padding: 0px 30px;
   color: #fff;
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 48px;
-  border: 1px solid #ea2c58;
+  border: 1px solid #0275f0;
   border-radius: 0px;
   outline: none !important;
   box-shadow: none !important;
@@ -417,7 +417,7 @@ a {
   text-transform: capitalize; }
   .main_btn:hover {
     background: transparent;
-    color: #ea2c58; }
+    color: #0275f0; }
 
 
 
