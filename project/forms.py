@@ -1,6 +1,6 @@
 from django import forms
 
-from project.models import Category, Tag
+from project.models import Category
 import datetime
 
 class DateInput(forms.DateInput):
@@ -11,7 +11,7 @@ class ContactForm(forms.Form):
       details = forms.CharField(label='Project Details',widget=forms.Textarea)
       category = forms.ModelChoiceField(queryset=Category.objects.all())
       target = forms.IntegerField(min_value=1,max_value=1000000000)
-      tags = forms.ModelMultipleChoiceField(widget = forms.CheckboxSelectMultiple,queryset=Tag.objects.all())
+      #tags = forms.ModelMultipleChoiceField(widget = forms.CheckboxSelectMultiple,queryset=Tag.objects.all())
       start_date = forms.DateField(widget=DateInput,initial=datetime.date.today,required=True)
       end_date = forms.DateField(widget=DateInput,initial=datetime.date.today,required=True)
       
@@ -46,14 +46,14 @@ class ContactForm(forms.Form):
                   raise forms.ValidationError("project title can't be more than 1000000000 ")
             return target
       
-      def clean_tags(self):
-            tags = self.cleaned_data['tags']
-            for val in tags:
-                  try:
-                        Tag.objects.get(name=val)
-                  except:
-                        raise forms.ValidationError("please choose from list")
-            return tags
+      # def clean_tags(self):
+      #       tags = self.cleaned_data['tags']
+      #       for val in tags:
+      #             try:
+      #                   Tag.objects.get(name=val)
+      #             except:
+      #                   raise forms.ValidationError("please choose from list")
+      #       return tags
                   
       
       def clean_start_date(self):
