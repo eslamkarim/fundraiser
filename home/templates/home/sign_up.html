@@ -31,7 +31,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-90 p-b-30">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" method="POST">
 					<span class="login100-form-title p-b-40">
 						Sign up
 					</span>
@@ -55,22 +55,22 @@
 					</div>
 
                     <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter your first name">
-						<input class="input100" type="text" name="first_name" placeholder="Please enter your first name">
+						<input class="input100" type="text" id="first_name" placeholder="Please enter your first name">
 						<span class="focus-input100"></span>
 					</div>
 
                     <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter your last name">
-						<input class="input100" type="text" name="last_name" placeholder="Please enter your last name">
+						<input class="input100" type="text" id="last_name" placeholder="Please enter your last name">
 						<span class="focus-input100"></span>
 					</div>
 
                     <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter your phone number">
-						<input class="input100" type="number" name="phone_number" placeholder="Enter your number number">
+						<input class="input100" type="number" id="phone_number" placeholder="Enter your number number">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter email: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Please enter your email">
+						<input class="input100" type="text" id="email" placeholder="Please enter your email">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -78,7 +78,7 @@
 						<span class="btn-show-pass">
 							<i class="fa fa fa-eye"></i>
 						</span>
-						<input class="input100" type="password" name="pass" placeholder="Please enter the password password">
+						<input class="input100" type="password" id="pass" placeholder="Please enter the password password">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -86,13 +86,13 @@
 						<span class="btn-show-pass">
 							<i class="fa fa fa-eye"></i>
 						</span>
-						<input class="input100" type="password" name="conf_pass" placeholder="Please confirm the password">
+						<input class="input100" type="password" id="conf_pass" placeholder="Please confirm the password">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Sign up
+						<button class="login100-form-btn" id="sign_up_btn">
+							Sign up btn
 						</button>
 					</div>
 
