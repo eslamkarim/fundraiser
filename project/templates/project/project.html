@@ -98,7 +98,7 @@
                         </form>
                     </div> -->
 
-                    <form enctype="multipart/form-data" action="{% url 'donate' 1 %}" method="post" > 
+                    <form enctype="multipart/form-data" action="{% url 'donate' project.id %}" method="post" > 
                         {% csrf_token %}
                         <div class="slidecontainer">
                             <input type="range" min="1" max="{{project.target}}" value="0" class="slider" id="calculatorSlider">
