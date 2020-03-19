@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django import forms
+from django.contrib import messages
 
 from .forms import ContactForm
 from .models import Project_data, Category, project_tags,  Project_pics
@@ -32,7 +33,6 @@ def create(request):
                   instance.save()
                   
             tags_list = request.POST.get('test').split(',')
-            print(tags_list)
             #insert all tags
             for val in tags_list:
                   project_tags.objects.create(
@@ -58,9 +58,24 @@ def project(request,project_id):
             "project":project
     }
       except Project_data.DoesNotExist:
-            return redirect('error')
+            return redirect(f'/404/')
       return render(request,'project/project.html',context)
 
       
 def error(request):
       return render(request,'project/error.html')
+
+def donate(request,project_id):
+      if request.method == 'POST':
+            project = Project_data.objects.get(id=project_id)
+            project.current_money += int(request.POST.get('donation_value'))
+            print(project.current_money, " === ",project.target)
+            if project.current_money <= project.target:
+                  project.save()
+                  messages.success(request, 'Your Donation done successfully!')
+                  return redirect(f"/project/{project_id}")
+            else:
+                  messages.error(request, 'Your Donation failed')
+                  return redirect(f"/project/{project_id}")
+      else:
+            return redirect(f"/project/{project_id}")

@@ -6,6 +6,7 @@
 <section class="home_banner_area h-auto">
     <div class="container pt-3 mh-50">
         <div class="bd-example">
+            
             <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                 {% for image in images %}
@@ -49,7 +50,7 @@
                   <h2 class="h6 font-weight-bold text-center mb-4">Overall progress</h2>
           
                   <!-- Progress bar 1 -->
-                  <div class="progress mx-auto" data-value='{% widthratio current target 100 %}'>
+                  <div class="progress mx-auto" data-value='{% widthratio project.current_money project.target 100 %}'>
                     <span class="progress-left">
                                   <span class="progress-bar border-primary"></span>
                     </span>
@@ -75,6 +76,17 @@
                 </div>
               </div>
             <div class="card justify-content-center w-100 bg-white rounded-lg p-5 shadow">
+                <div>
+                    {% if messages %}
+                    <ul class="messages" style="list-style-type: none;">
+                        {% for message in messages %}
+                        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        </div>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                <div>
                 <div class="card-body">
               
                   <h2 class="text-center mt-3 mb-4 pb-4"><strong>Donate Now</strong></h2>
@@ -84,17 +96,20 @@
                             <input id="calculatorSlider" class="input-range" type="range" value="0" min="0" max="{{target}}" />
                         </form>
                     </div> -->
-                    <div class="slidecontainer">
-                        <input type="range" min="1" max="{{project.target}}" value="0" class="slider" id="calculatorSlider">
-                      </div>
-              
-                  <!-- Grid row -->
-                  <div class="row"></div>
 
-                    <h2><span class="badge blue lighten-2 mb-4">Donation</span></h2>
-                    <input type="number" class="display-4" value="0" min="0" max="{{project.target}}" style="color:#0275f0; border:none; text-align: center;" id="donation">
-                    <a class="main_btn" href="donation.html">donate now</a>
-                  <!-- Grid row -->
+                    <form enctype="multipart/form-data" action="{% url 'donate' 1 %}" method="post" > 
+                        {% csrf_token %}
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="{{project.target}}" value="0" class="slider" id="calculatorSlider">
+                        </div>
+                
+                        <!-- Grid row -->
+                        <div class="row"></div>
+
+                        <h2><span class="badge blue lighten-2 mb-4">Donation</span></h2>
+                        <input type="number" class="display-4" value="0" min="0" max="{{project.target}}" style="color:#0275f0; border:none; text-align: center;" id="donation" name="donation_value">
+                        <input type="submit" class="main_btn" value="donate now">
+                        <!-- Grid row -->
               
                 </div>
               </div>
