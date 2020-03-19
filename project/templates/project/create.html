@@ -9,7 +9,10 @@
 
 {% block body_block %}
 {% load widget_tweaks %}
+
 <section class="section_gap">
+
+<img src=""> 
 <div class="container">
 <form enctype="multipart/form-data" action="{% url 'create' %}" method="post" >
     {% csrf_token %}

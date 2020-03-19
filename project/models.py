@@ -25,7 +25,7 @@ class Category(models.Model):
   
 class Project_pics(models.Model):
   project = models.ForeignKey('Project_data',on_delete=models.CASCADE)
-  image = models.ImageField(upload_to='project/static/project_pics/')
+  image = models.ImageField(upload_to='project_images')
   
   def __str__(self):
     return self.project.title
