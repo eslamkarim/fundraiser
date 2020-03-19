@@ -2,6 +2,7 @@ from django.contrib import admin
 from project.models import Project_data, Category, project_tags, Project_pics, project_comments
 
 
+
 # Register your models here.
 
 admin.site.register(Project_data)
