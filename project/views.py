@@ -3,7 +3,7 @@ from django.http.response import HttpResponse
 from django import forms
 
 from .forms import ContactForm
-from .models import Project_data, Category, project_tags, Tag, Project_pics
+from .models import Project_data, Category, project_tags,  Project_pics
       
 # Create your views here.
 
@@ -31,11 +31,13 @@ def create(request):
                   )
                   instance.save()
                   
+            tags_list = request.POST.get('test').split(',')
+            print(tags_list)
             #insert all tags
-            for val in filled_form.cleaned_data['tags']:
+            for val in tags_list:
                   project_tags.objects.create(
                         project = new_project,
-                        tag_id = Tag.objects.get(name=val)
+                        tag = val
                   )
             return redirect(f"/project/{new_project.id}")
       return render(request, 'project/create.html', {'form': filled_form})
