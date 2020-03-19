@@ -14,7 +14,7 @@
                 {% else %}
                 <div class="carousel-item">
                 {% endif %}
-                    <img src="{{image}}" class="d-block w-100" style="height: 700px;" alt="...">
+                    <img src="" class="d-block w-100" style="height: 700px;" alt="...">
                 </div>
                 {% endfor %}
                 </div>
@@ -36,12 +36,12 @@
         <div class="row justify-content-start section-title-wrap">
             <div class="col-12 text-lg-left">
                 <h1 style="border-bottom: solid lightgrey ;">
-                    {{title}}
+                    {{project.title}}
                 </h1>
             </div>
         <div class="col-7 text-left">
             <p>
-                {{details}}
+                {{project.details}}
             </p>
         </div>
             <div class="col-5 mb-4">
@@ -57,7 +57,7 @@
                                   <span class="progress-bar border-primary"></span>
                     </span>
                     <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                      <div class="h2 font-weight-bold">{% widthratio current target 100 %}<sup class="small">%</sup></div>
+                      <div class="h2 font-weight-bold">{% widthratio project.current_money project.target 100 %}<sup class="small">%</sup></div>
                     </div>
                   </div>
                   <!-- END -->
@@ -65,10 +65,10 @@
                   <!-- Demo info -->
                   <div class="row text-center mt-4">
                     <div class="col-6 border-right">
-                      <div class="h4 font-weight-bold mb-0">{{current}}$</div><span class="small text-gray">Current</span>
+                      <div class="h4 font-weight-bold mb-0">{{project.current_money}}$</div><span class="small text-gray">Current</span>
                     </div>
                     <div class="col-6">
-                      <div class="h4 font-weight-bold mb-0">{{target}}$</div><span class="small text-gray">Target</span>
+                      <div class="h4 font-weight-bold mb-0">{{project.target}}$</div><span class="small text-gray">Target</span>
                     </div>
                   </div>
                   <!-- END -->
@@ -85,14 +85,14 @@
                         </form>
                     </div> -->
                     <div class="slidecontainer">
-                        <input type="range" min="1" max="{{target}}" value="0" class="slider" id="calculatorSlider">
+                        <input type="range" min="1" max="{{project.target}}" value="0" class="slider" id="calculatorSlider">
                       </div>
               
                   <!-- Grid row -->
                   <div class="row"></div>
 
                     <h2><span class="badge blue lighten-2 mb-4">Donation</span></h2>
-                    <input type="number" class="display-4" value="0" min="0" max="{{target}}" style="color:#0275f0; border:none; text-align: center;" id="donation">
+                    <input type="number" class="display-4" value="0" min="0" max="{{project.target}}" style="color:#0275f0; border:none; text-align: center;" id="donation">
                     <a class="main_btn" href="donation.html">donate now</a>
                   <!-- Grid row -->
               

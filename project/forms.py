@@ -1,6 +1,6 @@
 from django import forms
 
-from project.models import Category
+from .models import Category
 
 import datetime
 
