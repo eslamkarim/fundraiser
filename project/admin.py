@@ -1,5 +1,5 @@
 from django.contrib import admin
-from project.models import Project_data, Category, Tag, project_tags, Project_pics, project_comments
+from .models import Project_data, Category, Tag, project_tags, Project_pics, project_comments
 
 
 # Register your models here.
