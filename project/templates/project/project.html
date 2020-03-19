@@ -1,0 +1,148 @@
+{% extends "nav.html" %}
+{% block style_block %}
+<link rel="stylesheet" href="{{ STATIC_URL }} /static/project/css/project.css">
+{% endblock %}
+{% block body_block %}
+<section class="home_banner_area h-auto">
+    <div class="container pt-3 mh-50">
+        <div class="bd-example">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                {% for image in images %}
+                {% if forloop.counter == 1 %}
+                <div class="carousel-item active">
+                {% else %}
+                <div class="carousel-item">
+                {% endif %}
+                    <img src="{{image}}" class="d-block w-100" style="height: 700px;" alt="...">
+                </div>
+                {% endfor %}
+                </div>
+                <ol class="carousel-indicators">
+                    {% for image in images %}
+                        {% if forloop.counter0 == 0 %}
+                            <li data-target="#carouselExampleCaptions" data-slide-to="{{forloop.counter0}}" class="active"></li>
+                        {% else %}
+                            <li data-target="#carouselExampleCaptions" data-slide-to="{{forloop.counter0}}"></li>
+                        {% endif %}
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="make_donation section_gap">
+    <div class="container">
+        <div class="row justify-content-start section-title-wrap">
+            <div class="col-12 text-lg-left">
+                <h1 style="border-bottom: solid lightgrey ;">
+                    {{title}}
+                </h1>
+            </div>
+        <div class="col-7 text-left">
+            <p>
+                {{details}}
+            </p>
+        </div>
+            <div class="col-5 mb-4">
+                <div class="bg-white rounded-lg p-5 shadow">
+                  <h2 class="h6 font-weight-bold text-center mb-4">Overall progress</h2>
+          
+                  <!-- Progress bar 1 -->
+                  <div class="progress mx-auto" data-value='{% widthratio current target 100 %}'>
+                    <span class="progress-left">
+                                  <span class="progress-bar border-primary"></span>
+                    </span>
+                    <span class="progress-right">
+                                  <span class="progress-bar border-primary"></span>
+                    </span>
+                    <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                      <div class="h2 font-weight-bold">{% widthratio current target 100 %}<sup class="small">%</sup></div>
+                    </div>
+                  </div>
+                  <!-- END -->
+          
+                  <!-- Demo info -->
+                  <div class="row text-center mt-4">
+                    <div class="col-6 border-right">
+                      <div class="h4 font-weight-bold mb-0">{{current}}$</div><span class="small text-gray">Current</span>
+                    </div>
+                    <div class="col-6">
+                      <div class="h4 font-weight-bold mb-0">{{target}}$</div><span class="small text-gray">Target</span>
+                    </div>
+                  </div>
+                  <!-- END -->
+                </div>
+              </div>
+            <div class="card justify-content-center w-100 bg-white rounded-lg p-5 shadow">
+                <div class="card-body">
+              
+                  <h2 class="text-center mt-3 mb-4 pb-4"><strong>Donate Now</strong></h2>
+                  <hr>
+                    <!-- <div class="slider-wrapper slider-strips">
+                        <form class="range-field my-5">
+                            <input id="calculatorSlider" class="input-range" type="range" value="0" min="0" max="{{target}}" />
+                        </form>
+                    </div> -->
+                    <div class="slidecontainer">
+                        <input type="range" min="1" max="{{target}}" value="0" class="slider" id="calculatorSlider">
+                      </div>
+              
+                  <!-- Grid row -->
+                  <div class="row"></div>
+
+                    <h2><span class="badge blue lighten-2 mb-4">Donation</span></h2>
+                    <input type="number" class="display-4" value="0" min="0" max="{{target}}" style="color:#0275f0; border:none; text-align: center;" id="donation">
+                    <a class="main_btn" href="donation.html">donate now</a>
+                  <!-- Grid row -->
+              
+                </div>
+              </div>
+        </div>
+    </div>
+    
+
+    <div class="container">
+        <h2 class="text-left">Comments</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+                        <p class="text-secondary text-center">15 Minutes Ago</p>
+                    </div>
+                    <div class="col-md-10">
+                        <p>
+                            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a>
+                       </p>
+                       <div class="clearfix"></div>
+                        <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <p>
+                            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+                       </p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="container pb-cmnt-container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-info">
+                        <div class="card-block">
+                            <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea"></textarea>
+                            <a class="main_btn" href="">Comment</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+      
+</section>
+{% endblock %}
+{% block script_block %}
+<script src="{{ STATIC_URL }} /static/project/js/project.js"></script>
+{% endblock %}

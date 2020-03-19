@@ -1,6 +1,6 @@
 from django import forms
 
-from project.models import Category, Tag
+from .models import Category, Tag
 import datetime
 
 class DateInput(forms.DateInput):

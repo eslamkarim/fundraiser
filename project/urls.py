@@ -1,6 +1,7 @@
 from django.urls import path,include
-from project.views import create
+from .views import create,project
 
 urlpatterns = [
-    path('create/', create,name='create')
+    path('create/', create,name='create'),
+    path('', project),
 ]
