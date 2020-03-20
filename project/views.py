@@ -54,9 +54,10 @@ def project(request,project_id):
             for i in images:
                   pics.append(i.image)
             context = {
-            "images": pics,
-            "project":project
-    }
+                  "images": pics,
+                  "project":project
+            }
+            print(context)
       except Project_data.DoesNotExist:
             return redirect(f'/project/error')
       return render(request,'project/project.html',context)
