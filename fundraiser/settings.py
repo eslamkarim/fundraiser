@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'home',
     'project',
     'widget_tweaks',
+    'mathfilters'
     
 ]
 
@@ -84,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fundraiser',
         'USER': 'root',
-        'PASSWORD': "123456",
+        'PASSWORD': "",
         'HOST': "",
         'PORT': "",
     }
