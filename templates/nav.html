@@ -25,6 +25,9 @@
 	{% block css_link_block %}
 
     {% endblock %}
+
+	{% block style_block %}
+	{% endblock %}
 </head>
 
 <body>
@@ -83,9 +86,6 @@
 									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="contact.html">Contact</a>
-									</li>
-									<li class="nav-item">
-										<a class="main_btn" href="donation.html">donate now</a>
 									</li>
 								</ul>
 							</div>
@@ -159,6 +159,8 @@
 	<script src="{{ STATIC_URL }} /static/js/jquery.ajaxchimp.min.js"></script>
 	<script src="{{ STATIC_URL }} /static/js/custom.js"></script>
 	{% block js_link_block %}
+	{% endblock %}
+	{% block script_block %}
     {% endblock %}
 </body>
 </html>
