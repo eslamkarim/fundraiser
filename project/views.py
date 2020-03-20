@@ -58,12 +58,12 @@ def project(request,project_id):
             "project":project
     }
       except Project_data.DoesNotExist:
-            return redirect(f'/404/')
+            return redirect(f'/project/error')
       return render(request,'project/project.html',context)
 
       
 def error(request):
-      return render(request,'project/error.html')
+      return render(request,"project/error.html")
 
 def donate(request,project_id):
       if request.method == 'POST':
