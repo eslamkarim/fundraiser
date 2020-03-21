@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django import forms
 from django.contrib import messages
+from itertools import chain
 
 from .forms import ContactForm
 from .models import Project_data, Category, project_tags,  Project_pics
@@ -53,9 +54,21 @@ def project(request,project_id):
             images = Project_pics.objects.filter(project_id=project_id)
             for i in images:
                   pics.append(i.image)
+            project_all_tags = project_tags.objects.filter(project_id=project_id).values_list("tag",flat=True)
+            test_list = list(project_all_tags)
+            related_projects_id = project_tags.objects.filter(tag__in=test_list).distinct().exclude( project_id=project_id).values_list("project",flat=True)[:5]
+            related_projects_data = Project_data.objects.filter(id__in=list(related_projects_id))
+            related_projects_pics = Project_pics.objects.none()
+            for project in related_projects_data:
+                  related_projects_pics = chain(related_projects_pics,Project_pics.objects.filter(project_id=project.id)[:1])
+            related_projects_pics_list = []
+            for i in related_projects_pics:
+                  related_projects_pics_list.append(i.image)
+            related_projects_list = zip(related_projects_data,related_projects_pics_list)
             context = {
                   "images": pics,
-                  "project":project
+                  "project":project,
+                  "related_projects_list": related_projects_list
             }
             print(context)
       except Project_data.DoesNotExist:
