@@ -21,10 +21,15 @@ function sign_up(){
                     conf_password: this.conf_password
                 }
 
-                window.alert("Check your email to activate your account.")
+                alert("Check your email to activate your account.")
+                $.ajax({
+                    type: "GET",
+                      url: "/signup.py",
+                      data: { param: new_user}
+                })
                 return new_user
             } else {
-                window.alert("Invalid inputs")
+                alert("Invalid inputs")
                 return (false)
             }
     }

@@ -31,7 +31,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-90 p-b-30">
-				<form class="login100-form validate-form" method="GET">
+				<form class="login100-form validate-form" action="{% url 'sign_up' %}" method="POST">
 					<span class="login100-form-title p-b-40">
 						Sign up
 					</span>
@@ -74,11 +74,11 @@
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-20" data-validate = "Please enter the password password">
+					<div class="wrap-input100 validate-input m-b-20" data-validate = "Please enter the password">
 						<span class="btn-show-pass">
 							<i class="fa fa fa-eye"></i>
 						</span>
-						<input class="input100" type="password" id="pass" placeholder="Please enter the password password">
+						<input class="input100" type="password" id="password" placeholder="Please enter the password password">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -86,19 +86,19 @@
 						<span class="btn-show-pass">
 							<i class="fa fa fa-eye"></i>
 						</span>
-						<input class="input100" type="password" id="conf_pass" placeholder="Please confirm the password">
+						<input class="input100" type="password" id="conf_password" placeholder="Please confirm the password">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" id="sign_up_btn">
-							Sign up btn
+							Sign up
 						</button>
 					</div>
 
 					<div class="flex-col-c p-t-224">
 						<span class="txt2 p-b-10">
-							Don’t have an account?
+							Do you have an account?
 						</span>
 
 						<a href="login.html" class="txt3 bo1 hov1">
@@ -109,7 +109,6 @@
 			</div>
 		</div>
 	</div>
-
 
 <!--===============================================================================================-->
 	<script src="../../../static/vendors/jquery/jquery-3.2.1.min.js"></script>
