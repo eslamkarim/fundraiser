@@ -173,7 +173,7 @@
             {% load mathfilters %}
             {% for project in related_projects_list %}
 
-          <div class="col-md-4">
+          <div class="col">
               <div class="cause shadow-sm">
                 <a href="{% url 'project' project.id %}" class="cause-link d-block">
                   <img src="{{project.cover.url}}" width="349" height="244" alt="Image" style="margin-top:25px">
