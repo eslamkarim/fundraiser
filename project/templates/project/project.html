@@ -1,6 +1,7 @@
 {% extends "nav.html" %}
 {% block style_block %}
 <link rel="stylesheet" href="{{ STATIC_URL }} /static/project/css/project.css">
+
 {% endblock %}
 {% block body_block %}
 <section class="home_banner_area h-auto">
@@ -170,13 +171,12 @@
         <div class="row">
 
             {% load mathfilters %}
-            {% for project,image in related_projects_list %}
+            {% for project in related_projects_list %}
 
           <div class="col-md-4">
               <div class="cause shadow-sm">
-
                 <a href="{% url 'project' project.id %}" class="cause-link d-block">
-                  <img src="{{image.url}}" width="349" height="244" alt="Image" style="margin-top:25px">
+                  <img src="{{project.cover.url}}" width="349" height="244" alt="Image" style="margin-top:25px">
                   <div class="custom-progress-wrap">
                     {% with numerator=project.current_money denominator=project.target %}
                         <span class="caption">{{ numerator|div:denominator|mul:100|intdiv:1 }}% complete</span>
@@ -204,12 +204,12 @@
                 </div>
 
               </div>
+            </div>
+            
+            {% endfor %}
           </div>
           
-            {% endfor %}
         </div>
-
-      </div>
     </div>
 </section>
 {% endblock %}

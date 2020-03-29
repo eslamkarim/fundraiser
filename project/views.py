@@ -14,7 +14,8 @@ def create(request):
   if request.method == 'POST':
       filled_form = ContactForm(request.POST,request.FILES)
       if filled_form.is_valid():
-            
+            print("===============")
+            print(request.FILES.getlist('cover_images')[0])
             #create project
             new_project = Project_data.objects.create(
                   title = filled_form.cleaned_data['project_title'],
@@ -23,6 +24,7 @@ def create(request):
                   target = filled_form.cleaned_data['target'],
                   start_date = filled_form.cleaned_data['start_date'],
                   end_date = filled_form.cleaned_data['end_date'],
+                  cover = request.FILES.getlist('cover_images')[0],
                   )
             
             #save all pictures
@@ -41,6 +43,7 @@ def create(request):
                         tag = val
                   )
             return redirect(f"/project/{new_project.id}")
+      print(filled_form.errors)
       return render(request, 'project/create.html', {'form': filled_form})
             
   else:
@@ -58,19 +61,13 @@ def project(request,project_id):
             test_list = list(project_all_tags)
             related_projects_id = project_tags.objects.filter(tag__in=test_list).distinct().exclude( project_id=project_id).values_list("project",flat=True)[:5]
             related_projects_data = Project_data.objects.filter(id__in=list(related_projects_id))
-            related_projects_pics = Project_pics.objects.none()
-            for project in related_projects_data:
-                  related_projects_pics = chain(related_projects_pics,Project_pics.objects.filter(project_id=project.id)[:1])
-            related_projects_pics_list = []
-            for i in related_projects_pics:
-                  related_projects_pics_list.append(i.image)
-            related_projects_list = zip(related_projects_data,related_projects_pics_list)
             context = {
                   "images": pics,
                   "project":project,
-                  "related_projects_list": related_projects_list
+                  "related_projects_list": related_projects_data
             }
             print(context)
+            
       except Project_data.DoesNotExist:
             return redirect(f'/project/error')
       return render(request,'project/project.html',context)
