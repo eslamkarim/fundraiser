@@ -19,8 +19,11 @@ def home(request):
 
     return render(request, 'home/home.html', {"context": context})
 
+
 def categories(request):
+
     projects = Project_data.objects.all()
+
     categories = Category.objects.all()
 
     context = {
@@ -28,4 +31,4 @@ def categories(request):
         "categories": categories
     }
 
-    return render(request, 'home/categories.html', {"context": context})
+    return render(request, 'home/categories.html', {"context": context })
