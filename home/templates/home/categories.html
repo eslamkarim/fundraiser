@@ -1,0 +1,100 @@
+{% extends "nav.html" %}
+
+{% block css_link_block %}
+
+	<link rel="stylesheet" href="{{ STATIC_URL }} /static/css/font-awesome.min.css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Mansalva|Roboto&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/animate.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/aos.css">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/style.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }} /static/home/css/categories.css">
+
+{% endblock %}
+
+
+
+{% block body_block %}
+
+    <section class="section_gap">
+
+        <!-- Control buttons -->
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div id="myBtnContainer ">
+                      <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+                        {% for category in context.categories %}
+                          <button class="btn" onclick="filterSelection('{{ category.name }}')"> {{ category.name }}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- The filterable elements. Note that some have multiple class names (this can be used if they belong to multiple categories) -->
+            <div class="container">
+                <div class="row">
+                    {% for project in context.projects %}
+                        <div class="filterDiv mt-4 {{ project.category }} col-md-4">
+                          <div class="cause shadow-sm">
+
+                            <a href="/project/{{ project.id }}" class="cause-link d-block">
+                              <img src="{{ project.cover.url }}" alt="Image" class="img-fluid">
+                              <div class="custom-progress-wrap">
+                                <span class="caption">{% widthratio project.current_money project.target 100 %}% complete</span>
+                                <div class="custom-progress-inner">
+                                  <div class="custom-progress bg-danger" style="width:{% widthratio project.current_money project.target 100 %}%;"></div>
+                                </div>
+                              </div>
+                            </a>
+
+                            <div class="px-3 pt-3 border-top-0 border border shadow-sm">
+                              <span class="badge-danger py-1 small px-2 rounded mb-3 d-inline-block">{{ project.category }}</span>
+                              <h3 class="mb-4"><a href="/project/{{ project.id }}">{{ project.title }}</a></h3>
+                              <div class="border-top border-light border-bottom py-2 d-flex">
+                                <div>Donated</div>
+                                <div class="ml-auto"><strong class="text-primary">{{ project.current_money }} E.G</strong></div>
+                              </div>
+
+                              <div class="py-4">
+                                <div class="d-flex align-items-center">
+                                  <img src="{{ STATIC_URL }} /static/home/images/person_1.jpg" alt="Image" class="rounded-circle mr-3" width="50">
+                                  <div class="">James Smith</div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                      </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block js_link_block %}
+    <script src="{{ STATIC_URL }} /static/home/js/jquery-3.3.1.min.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/popper.min.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/owl.carousel.min.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/jquery.sticky.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/jquery.waypoints.min.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/jquery.animateNumber.min.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/jquery.fancybox.min.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/jquery.easing.1.3.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/aos.js"></script>
+
+    <script src="{{ STATIC_URL }} /static/home/js/main.js"></script>
+    <script src="{{ STATIC_URL }} /static/home/js/categories.js"></script>
+{% endblock %}
