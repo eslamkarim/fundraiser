@@ -1,7 +1,6 @@
 {% extends "nav.html" %}
 {% block style_block %}
 <link rel="stylesheet" href="{{ STATIC_URL }} /static/project/css/project.css">
-
 {% endblock %}
 {% block body_block %}
 <section class="home_banner_area h-auto">
@@ -135,10 +134,17 @@
                        <div class="clearfix"></div>
                         <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                         <p>
-                            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+                            <a class="float-right btn btn-outline-primary ml-2 reply-popup"> <i class="fa fa-reply"></i> Reply</a>
                        </p>
                     </div>
                 </div>
+                  <div class="comment-box add-comment reply-box row" style="display: none;">
+                    <span class="commenter-name w-100">
+                      <input class="col-9" type="text" placeholder="Add a public reply" name="Add Comment">
+                      <button type="submit" class="btn btn-outline-primary col-1">Post</button>
+                      <a class="float-right btn btn-outline-danger reply-popup col-1">Cancel</a>
+                    </span>
+                  </div>
             </div>
             
         </div>
@@ -159,7 +165,6 @@
     </div>
     <div class="site-section">
       <div class="container">
-
         <div class="row mb-5 align-items-st">
           <div class="col-md-4">
             <div class="heading-20219">
