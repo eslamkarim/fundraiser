@@ -5,7 +5,7 @@ from django.contrib import messages
 from itertools import chain
 
 from .forms import ContactForm
-from .models import Project_data, Category, project_tags,  Project_pics
+from .models import Project_data, Category, project_tags,  Project_pics, project_comments
       
 # Create your views here.
 
@@ -61,9 +61,14 @@ def project(request,project_id):
             test_list = list(project_all_tags)
             related_projects_id = project_tags.objects.filter(tag__in=test_list).distinct().exclude( project_id=project_id).values_list("project",flat=True)[:5]
             related_projects_data = Project_data.objects.filter(id__in=list(related_projects_id))
+            
+            # get project comments
+            comments = project_comments.objects.filter(project_id=project_id)
+
             context = {
                   "images": pics,
-                  "project":project,
+                  "project": project,
+                  "comments": comments,
                   "related_projects_list": related_projects_data
             }
             print(context)
@@ -80,13 +85,27 @@ def donate(request,project_id):
       if request.method == 'POST':
             project = Project_data.objects.get(id=project_id)
             project.current_money += int(request.POST.get('donation_value'))
-            print(project.current_money, " === ",project.target)
             if project.current_money <= project.target:
                   project.save()
                   messages.success(request, 'Your Donation done successfully!')
                   return redirect(f"/project/{project_id}")
             else:
                   messages.error(request, 'Your Donation failed')
+                  return redirect(f"/project/{project_id}")
+      else:
+            return redirect(f"/project/{project_id}")
+
+def comment(request,project_id):
+      if request.method == 'POST':
+            project = Project_data.objects.get(id=project_id)
+            comment = request.POST.get('comment')
+            if len(comment) > 0:
+                  project_comments.objects.create(
+                        project = project,
+                        comment = comment
+                  )
+                  return redirect(f"/project/{project_id}")
+            else:
                   return redirect(f"/project/{project_id}")
       else:
             return redirect(f"/project/{project_id}")
