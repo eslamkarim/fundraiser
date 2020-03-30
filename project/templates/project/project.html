@@ -165,7 +165,7 @@
                         <input type="number" class="display-4" value="0" min="0" max="{{project.target}}" style="color:#0275f0; border:none; text-align: center;" id="donation" name="donation_value">
                         <input type="submit" class="main_btn" value="donate now">
                         <!-- Grid row -->
-              
+                    </form>
                 </div>
               </div>
         </div>
@@ -207,6 +207,7 @@
         <h2 class="text-left" style="border-bottom: solid lightgrey ;">Comments</h2>
         <div class="card">
             <div class="card-body">
+              {% for comment in comments %}
                 <div class="row">
                     <div class="col-md-2">
                         <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
@@ -217,12 +218,13 @@
                             <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a>
                        </p>
                        <div class="clearfix"></div>
-                        <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <p>{{comment.comment}}</p>
                         <p>
                             <a class="float-right btn btn-outline-primary ml-2 reply-popup"> <i class="fa fa-reply"></i> Reply</a>
                        </p>
                     </div>
-                </div>
+                  </div>
+                  {% endfor %}
                   <div class="comment-box add-comment reply-box row" style="display: none;">
                     <span class="commenter-name w-100">
                       <input class="col-9" type="text" placeholder="Add a public reply" name="Add Comment">
@@ -238,10 +240,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-info">
+                      <form enctype="multipart/form-data" action="{% url 'comment' project.id %}" method="post" > 
+                        {% csrf_token %}
                         <div class="card-block">
-                            <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea"></textarea>
-                            <a class="main_btn" href="">Comment</a>
+                            <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea" name="comment"></textarea>
+                            <input type="submit" class="main_btn" value="Comment">
                         </div>
+                      </form>
                     </div>
                 </div>
             </div>
@@ -251,7 +256,7 @@
     <div class="site-section">
       <div class="container">
         <div class="row mb-5 align-items-st">
-          <div class="col-md-4">
+          <div class="">
             <div class="heading-20219">
               <h2 class="title text-cursive">Related Projects</h2>
             </div>
@@ -269,9 +274,9 @@
                   <img src="{{project.cover.url}}" width="349" height="244" alt="Image" style="margin-top:25px">
                   <div class="custom-progress-wrap">
                     {% with numerator=project.current_money denominator=project.target %}
-                        <span class="caption">{{ numerator|div:denominator|mul:100|intdiv:1 }}% complete</span>
+                        <span class="caption">{% widthratio project.current_money project.target 100 %}% complete</span>
                     <div class="custom-progress-inner">
-                      <div class="custom-progress bg-danger" style="width: {{ numerator|div:denominator|mul:100|intdiv:1 }}%;"></div>
+                      <div class="custom-progress bg-danger" style="width: {% widthratio project.current_money project.target 100 %};"></div>
                     </div>
                     {% endwith %}
                   </div>
