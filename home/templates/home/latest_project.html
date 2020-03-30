@@ -10,25 +10,26 @@
         </div>
 
         <div class="row">
+
           <div class="col-md-4">
               <div class="cause shadow-sm">
               
-                <a href="#" class="cause-link d-block">
-                  <img src="{{ STATIC_URL }} /static/home/images/img_1.jpg" alt="Image" class="img-fluid">
+                <a href="/project/{{ context.latest_projects.0.id }}" class="cause-link d-block">
+                  <img src="{{ context.latest_projects.0.cover.url }}" alt="Image" class="img-fluid">
                   <div class="custom-progress-wrap">
-                    <span class="caption">80% complete</span>
+                    <span class="caption">{% widthratio context.latest_projects.0.current_money context.latest_projects.0.target 100 %}% complete</span>
                     <div class="custom-progress-inner">
-                      <div class="custom-progress bg-danger" style="width: 80%;"></div>
+                      <div class="custom-progress bg-danger" style="width:{% widthratio context.latest_projects.0.current_money context.latest_projects.0.target 100 %}%;"></div>
                     </div>
                   </div>
                 </a>
 
                 <div class="px-3 pt-3 border-top-0 border border shadow-sm">
-                  <span class="badge-danger py-1 small px-2 rounded mb-3 d-inline-block">School</span>
-                  <h3 class="mb-4"><a href="#">Alias Odit Ipsam Quas Unde Obcaecati</a></h3>
+                  <span class="badge-danger py-1 small px-2 rounded mb-3 d-inline-block">{{ context.latest_projects.0.category }}</span>
+                  <h3 class="mb-4"><a href="/project/{{ context.latest_projects.0.id }}">{{ context.latest_projects.0.title }}</a></h3>
                   <div class="border-top border-light border-bottom py-2 d-flex">
                     <div>Donated</div>
-                    <div class="ml-auto"><strong class="text-primary">$32,919</strong></div>
+                    <div class="ml-auto"><strong class="text-primary">{{ context.latest_projects.0.current_money }} E.G</strong></div>
                   </div>
 
                   <div class="py-4">
@@ -45,22 +46,22 @@
             
             <div class="cause shadow-sm">
               
-                <a href="#" class="cause-link d-block">
-                  <img src="{{ STATIC_URL }} /static/home/images/img_2.jpg" alt="Image" class="img-fluid">
+                <a href="/project/{{ context.latest_projects.1.id }}" class="cause-link d-block">
+                  <img src="{{ context.latest_projects.1.cover.url }}" alt="Image" class="img-fluid">
                   <div class="custom-progress-wrap">
-                    <span class="caption">80% complete</span>
+                    <span class="caption">{% widthratio context.latest_projects.1.current_money context.latest_projects.1.target 100 %}% complete</span>
                     <div class="custom-progress-inner">
-                      <div class="custom-progress bg-primary" style="width: 80%;"></div>
+                      <div class="custom-progress bg-primary" style="width: {% widthratio context.latest_projects.1.current_money context.latest_projects.1.target 100 %}%;"></div>
                     </div>
                   </div>
                 </a>
 
                 <div class="px-3 pt-3 border-top-0 border border shadow-sm">
-                  <span class="badge-primary py-1 small px-2 rounded mb-3 d-inline-block">Health</span>
-                  <h3 class="mb-4"><a href="#">Alias Odit Ipsam Quas Unde Obcaecati</a></h3>
+                  <span class="badge-primary py-1 small px-2 rounded mb-3 d-inline-block">{{ context.latest_projects.1.category }}</span>
+                  <h3 class="mb-4"><a href="/project/{{ context.latest_projects.1.id }}">{{ context.latest_projects.1.title }}</a></h3>
                   <div class="border-top border-light border-bottom py-2 d-flex">
                     <div>Donated</div>
-                    <div class="ml-auto"><strong class="text-primary">$32,919</strong></div>
+                    <div class="ml-auto"><strong class="text-primary">{{ context.latest_projects.1.current_money }} E.G</strong></div>
                   </div>
 
                   <div class="py-4">
@@ -78,22 +79,22 @@
             
             <div class="cause shadow-sm">
               
-                <a href="#" class="cause-link d-block">
-                  <img src="{{ STATIC_URL }} /static/home/images/img_3.jpg" alt="Image" class="img-fluid">
+                <a href="/project/{{ context.latest_projects.2.id }}" class="cause-link d-block">
+                  <img src="{{ context.latest_projects.2.cover.url }}" alt="Image" class="img-fluid">
                   <div class="custom-progress-wrap">
-                    <span class="caption">80% complete</span>
+                    <span class="caption">{% widthratio context.latest_projects.2.current_money context.latest_projects.2.target 100 %}% complete</span>
                     <div class="custom-progress-inner">
-                      <div class="custom-progress bg-warning" style="width: 80%;"></div>
+                      <div class="custom-progress bg-warning" style="width: {% widthratio context.latest_projects.2.current_money context.latest_projects.2.target 100 %}%;"></div>
                     </div>
                   </div>
                 </a>
 
                 <div class="px-3 pt-3 border-top-0 border border ">
-                  <span class="badge-warning py-1 small px-2 rounded mb-3 d-inline-block">Livelihood</span>
-                  <h3 class="mb-4"><a href="#">Alias Odit Ipsam Quas Unde Obcaecati</a></h3>
+                  <span class="badge-warning py-1 small px-2 rounded mb-3 d-inline-block">{{ context.latest_projects.2.category }}</span>
+                  <h3 class="mb-4"><a href="/project/{{ context.latest_projects.2.id }}">{{ context.latest_projects.2.title }}</a></h3>
                   <div class="border-top border-light border-bottom py-2 d-flex">
                     <div>Donated</div>
-                    <div class="ml-auto"><strong class="text-primary">$32,919</strong></div>
+                    <div class="ml-auto"><strong class="text-primary">{{ context.latest_projects.2.current_money }} E.G</strong></div>
                   </div>
 
                   <div class="py-4">
@@ -107,6 +108,7 @@
               </div>
 
           </div>
+
         </div>
 
       </div>

@@ -1,6 +1,7 @@
 {% extends "nav.html" %}
 {% block style_block %}
 <link rel="stylesheet" href="{{ STATIC_URL }} /static/project/css/project.css">
+
 {% endblock %}
 {% block body_block %}
 <section class="home_banner_area h-auto">
@@ -156,7 +157,60 @@
         </div>
     
     </div>
-      
+    <div class="site-section">
+      <div class="container">
+
+        <div class="row mb-5 align-items-st">
+          <div class="col-md-4">
+            <div class="heading-20219">
+              <h2 class="title text-cursive">Related Projects</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+
+            {% load mathfilters %}
+            {% for project in related_projects_list %}
+
+          <div class="col">
+              <div class="cause shadow-sm">
+                <a href="{% url 'project' project.id %}" class="cause-link d-block">
+                  <img src="{{project.cover.url}}" width="349" height="244" alt="Image" style="margin-top:25px">
+                  <div class="custom-progress-wrap">
+                    {% with numerator=project.current_money denominator=project.target %}
+                        <span class="caption">{{ numerator|div:denominator|mul:100|intdiv:1 }}% complete</span>
+                    <div class="custom-progress-inner">
+                      <div class="custom-progress bg-danger" style="width: {{ numerator|div:denominator|mul:100|intdiv:1 }}%;"></div>
+                    </div>
+                    {% endwith %}
+                  </div>
+                </a>
+
+                <div class="px-3 pt-3 border-top-0 border border shadow-sm">
+                  <span class="badge-danger py-1 small px-2 rounded mb-3 d-inline-block">{{project.category.name}}</span>
+                  <h3 class="mb-4"><a href="{% url 'project' project.id %}">{{project.title}}</a></h3>
+                  <div class="border-top border-light border-bottom py-2 d-flex">
+                    <div>Donated</div>
+                    <div class="ml-auto"><strong class="text-primary">${{project.current_money}}</strong></div>
+                  </div>
+
+                  <div class="py-4">
+                    <div class="d-flex align-items-center">
+                      <img src="{{ STATIC_URL }} /static/home/images/person_1.jpg" alt="Image" class="rounded-circle mr-3" width="50">
+                      <div class="">James Smith</div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            
+            {% endfor %}
+          </div>
+          
+        </div>
+    </div>
 </section>
 {% endblock %}
 {% block script_block %}

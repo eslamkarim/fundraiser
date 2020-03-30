@@ -10,43 +10,104 @@
         </div>
 
         <div class="row">
-            {% if  context.featured_projects %}
-                {% for project in context.featured_projects %}
-                    <div class="col-md-4">
 
-                        <div class="cause shadow-sm">
+          <div class="col-md-4">
+              <div class="cause shadow-sm">
 
-                            <a href="#" class="cause-link d-block">
-                              <img src="{{ STATIC_URL }} /static/home/images/img_3.jpg" alt="Image" class="img-fluid">
-                              <div class="custom-progress-wrap">
-                                <span class="caption">80% complete</span>
-                                <div class="custom-progress-inner">
-                                  <div class="custom-progress bg-warning" style="width:{{ project.current_money|divisibleby:project.target }}%;"></div>
-                                </div>
-                              </div>
-                            </a>
-
-                            <div class="px-3 pt-3 border-top-0 border border ">
-                              <span class="badge-warning py-1 small px-2 rounded mb-3 d-inline-block">{{ project.category }}</span>
-                              <h3 class="mb-4"><a href="#">{{ project.title }}</a></h3>
-                              <div class="border-top border-light border-bottom py-2 d-flex">
-                                <div>Donated</div>
-                                <div class="ml-auto"><strong class="text-primary">{{ project.current_money }}</strong></div>
-                              </div>
-
-                              <div class="py-4">
-                                <div class="d-flex align-items-center">
-                                  <img src="{{ STATIC_URL }} /static/home/images/person_1.jpg" alt="Image" class="rounded-circle mr-3" width="50">
-                                  <div class="">James Smith</div>
-                                </div>
-                              </div>
-                            </div>
-
-                          </div>
-
+                <a href="/project/{{ context.featured_projects.0.id }}" class="cause-link d-block">
+                  <img src="{{ context.featured_projects.0.cover.url }}" alt="Image" class="img-fluid">
+                  <div class="custom-progress-wrap">
+                    <span class="caption">{% widthratio context.featured_projects.0.current_money context.featured_projects.0.target 100 %}% complete</span>
+                    <div class="custom-progress-inner">
+                      <div class="custom-progress bg-danger" style="width:{% widthratio context.featured_projects.0.current_money context.featured_projects.0.target 100 %}%;"></div>
                     </div>
-                {% endfor %}
-            {% endif %}
+                  </div>
+                </a>
+
+                <div class="px-3 pt-3 border-top-0 border border shadow-sm">
+                  <span class="badge-danger py-1 small px-2 rounded mb-3 d-inline-block">{{ context.featured_projects.0.category }}</span>
+                  <h3 class="mb-4"><a href="/project/{{ context.featured_projects.0.id }}">{{ context.featured_projects.0.title }}</a></h3>
+                  <div class="border-top border-light border-bottom py-2 d-flex">
+                    <div>Donated</div>
+                    <div class="ml-auto"><strong class="text-primary">{{ context.featured_projects.0.current_money }} E.G</strong></div>
+                  </div>
+
+                  <div class="py-4">
+                    <div class="d-flex align-items-center">
+                      <img src="{{ STATIC_URL }} /static/home/images/person_1.jpg" alt="Image" class="rounded-circle mr-3" width="50">
+                      <div class="">James Smith</div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+          <div class="col-md-4">
+
+            <div class="cause shadow-sm">
+
+                <a href="/project/{{ context.featured_projects.1.id }}" class="cause-link d-block">
+                  <img src="{{ context.featured_projects.1.cover.url }}" alt="Image" class="img-fluid">
+                  <div class="custom-progress-wrap">
+                    <span class="caption">{% widthratio context.featured_projects.1.current_money context.featured_projects.1.target 100 %}% complete</span>
+                    <div class="custom-progress-inner">
+                      <div class="custom-progress bg-primary" style="width: {% widthratio context.featured_projects.1.current_money context.featured_projects.1.target 100 %}%;"></div>
+                    </div>
+                  </div>
+                </a>
+
+                <div class="px-3 pt-3 border-top-0 border border shadow-sm">
+                  <span class="badge-primary py-1 small px-2 rounded mb-3 d-inline-block">{{ context.featured_projects.1.category }}</span>
+                  <h3 class="mb-4"><a href="/project/{{ context.featured_projects.1.id }}">{{ context.featured_projects.1.title }}</a></h3>
+                  <div class="border-top border-light border-bottom py-2 d-flex">
+                    <div>Donated</div>
+                    <div class="ml-auto"><strong class="text-primary">{{ context.featured_projects.1.current_money }} E.G</strong></div>
+                  </div>
+
+                  <div class="py-4">
+                    <div class="d-flex align-items-center">
+                      <img src="{{ STATIC_URL }} /static/home/images/person_1.jpg" alt="Image" class="rounded-circle mr-3" width="50">
+                      <div class="">James Smith</div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+          </div>
+          <div class="col-md-4">
+
+            <div class="cause shadow-sm">
+
+                <a href="/project/{{ context.featured_projects.2.id }}" class="cause-link d-block">
+                  <img src="{{ context.featured_projects.2.cover.url }}" alt="Image" class="img-fluid">
+                  <div class="custom-progress-wrap">
+                    <span class="caption">{% widthratio context.featured_projects.2.current_money context.featured_projects.2.target 100 %}% complete</span>
+                    <div class="custom-progress-inner">
+                      <div class="custom-progress bg-warning" style="width: {% widthratio context.featured_projects.2.current_money context.featured_projects.2.target 100 %}%;"></div>
+                    </div>
+                  </div>
+                </a>
+
+                <div class="px-3 pt-3 border-top-0 border border ">
+                  <span class="badge-warning py-1 small px-2 rounded mb-3 d-inline-block">{{ context.featured_projects.2.category }}</span>
+                  <h3 class="mb-4"><a href="/project/{{ context.featured_projects.2.id }}">{{ context.featured_projects.2.title }}</a></h3>
+                  <div class="border-top border-light border-bottom py-2 d-flex">
+                    <div>Donated</div>
+                    <div class="ml-auto"><strong class="text-primary">{{ context.featured_projects.2.current_money }} E.G</strong></div>
+                  </div>
+
+                  <div class="py-4">
+                    <div class="d-flex align-items-center">
+                      <img src="{{ STATIC_URL }} /static/home/images/person_1.jpg" alt="Image" class="rounded-circle mr-3" width="50">
+                      <div class="">James Smith</div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+          </div>
 
         </div>
 

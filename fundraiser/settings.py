@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'home',
     'project',
     'widget_tweaks',
+    'mathfilters'
     
 ]
 

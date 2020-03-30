@@ -8,14 +8,12 @@ class Project_data(models.Model):
   category = models.ForeignKey('Category', on_delete=models.CASCADE)
   target = models.IntegerField()
   start_date = models.DateField()
-  # add this filed to use in home page
-  # created_at = models.DateTimeField(auto_now_add=True)
   end_date = models.DateField()
   rating = models.IntegerField(default=3)
   reports = models.IntegerField(default=0)
   current_money = models.IntegerField(default=0)
-  #cover = models.ImageField(upload_to='project_images')
-
+  created_at = models.DateTimeField(auto_now_add=True)
+  cover = models.ImageField(upload_to='project_images')
   def __str__(self):
     return self.title
   
