@@ -27,13 +27,14 @@
   display: inline-block;
   position: relative;
   font-family: FontAwesome;
+  padding-top: 50px;
 }
 
 .stars-outer::before {
   display: block;
   content: "\f006 \f006 \f006 \f006 \f006";
   color: lightgrey;
-  font-size: 8rem;
+  font-size: 8em;
 }
 
 .stars-inner {
@@ -44,13 +45,14 @@
   white-space: nowrap;
   overflow: hidden;
   width: 0;
+  padding-top: 50px;
 }
 
 .stars-inner::before {
   display: inline-block;
   content: "\f005 \f005 \f005 \f005 \f005";
   color: #f8ce0b;
-  font-size: 8rem;
+  font-size: 8em;
 }
 
 
@@ -191,11 +193,11 @@
           <div class="row" style="border-bottom: solid lightgrey ;">
           </div>
           <div class="row">  
-            <h2 class="col-3">Project Rate: </h2>
+            <h2 class="col-3" style="padding-top: 50px;">Project Rate: </h2>
             <div class="col-6">  
               <div class="ratingbox">
-                <div class="stars-outer ">
-                  <div class="stars-inner" style="width:  50%;"></div>
+                <div class="stars-outer">
+                  <div class="stars-inner" style="width:{% widthratio project.rating 5 100 %}%;"></div>
                 </div>
               </div>
             </div>
