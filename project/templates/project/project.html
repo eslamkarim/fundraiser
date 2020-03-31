@@ -1,62 +1,6 @@
 {% extends "nav.html" %}
 {% block style_block %}
 <link rel="stylesheet" href="{{ STATIC_URL }} /static/project/css/project.css">
-<style>
-  .starrating > input {display: none;}  /* Remove radio buttons */
-
-.starrating > label:before { 
-  content: "\f005"; /* Star */
-  margin: 2px;
-  font-size: 8em;
-  font-family: FontAwesome;
-  display: inline-block; 
-}
-
-.starrating > label
-{
-  color: lightgrey; /* Start color when not clicked */
-}
-
-.starrating > input:checked ~ label
-{ color: #ffca08 ; } /* Set yellow color when star checked */
-
-.starrating > input:hover ~ label
-{ color: #ffca08 ;  } /* Set yellow color when star hover */
-
-.stars-outer {
-  display: inline-block;
-  position: relative;
-  font-family: FontAwesome;
-  padding-top: 50px;
-}
-
-.stars-outer::before {
-  display: block;
-  content: "\f006 \f006 \f006 \f006 \f006";
-  color: lightgrey;
-  font-size: 8em;
-}
-
-.stars-inner {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-  padding-top: 50px;
-}
-
-.stars-inner::before {
-  display: inline-block;
-  content: "\f005 \f005 \f005 \f005 \f005";
-  color: #f8ce0b;
-  font-size: 8em;
-}
-
-
-</style>
 {% endblock %}
 {% block body_block %}
 <section class="home_banner_area h-auto">
@@ -207,53 +151,60 @@
     </div>
     <div class="container mt-25">
         <h2 class="text-left" style="border-bottom: solid lightgrey ;">Comments</h2>
-        <div class="card">
-            <div class="card-body">
-              {% for comment in comments %}
-                <div class="row">
-                    <div class="col-md-2">
-                        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
-                        <p class="text-secondary text-center">15 Minutes Ago</p>
-                    </div>
-                    <div class="col-md-10">
-                        <p>
-                            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a>
-                       </p>
-                       <div class="clearfix"></div>
-                        <p>{{comment.comment}}</p>
-                        <p>
-                            <a class="float-right btn btn-outline-primary ml-2 reply-popup"> <i class="fa fa-reply"></i> Reply</a>
-                       </p>
-                    </div>
+        <div class="container text-left">
+          <div class="row">
+            <div class="col-12">
+              <div class="comments">
+                <div class="comment-box add-comment">
+                  <span class="commenter-pic">
+                    <img src="https://www.uiuxstream.com/images/user-icon.jpg" class="img-fluid">
+                  </span>
+                  <span class="commenter-name">
+                    <form enctype="multipart/form-data" action="{% url 'comment' project.id %}" method="post" > 
+                      {% csrf_token %}
+                      <div class="card-block">
+                        <input type="text" placeholder="Add a comment" name="comment">
+                        <button type="submit" class="btn btn-default">Comment</button>
+                      </div>
+                    </form>
+                  </span>
+                </div>
+                {% for comment in comments %}
+                <div class="comment-box">
+                  <span class="commenter-pic">
+                    <img src="https://www.uiuxstream.com/images/user-icon.jpg" class="img-fluid">
+                  </span>
+                  <span class="commenter-name">
+                    <a href="#">Happy uiuxStream</a> <span class="comment-time">2 hours ago</span>
+                  </span>       
+                  <p class="comment-txt more text-center">{{comment.comment}}</p>
+                  <div class="comment-meta">
+                    <button class="comment-reply reply-popup" onclick="$('#{{comment.id}}').toggle()"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>  
                   </div>
-                  {% endfor %}
-                  <div class="comment-box add-comment reply-box row" style="display: none;">
+                  <div id='{{comment.id}}' class="comment-box add-comment reply-box row" style="display: none;">
                     <span class="commenter-name w-100">
-                      <input class="col-9" type="text" placeholder="Add a public reply" name="Add Comment">
-                      <button type="submit" class="btn btn-outline-primary col-1">Post</button>
-                      <a class="float-right btn btn-outline-danger reply-popup col-1">Cancel</a>
+                      <input class="col-7" type="text" placeholder="Add a public reply" name="Add Comment">
+                      <button type="submit" class="btn btn-outline-primary col-1">Reply</button>
+                      <a class="float-right btn btn-default reply-popup col-1">Cancel</a>
                     </span>
                   </div>
-            </div>
-            
-        </div>
-
-        <div class="container pb-cmnt-container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card card-info">
-                      <form enctype="multipart/form-data" action="{% url 'comment' project.id %}" method="post" > 
-                        {% csrf_token %}
-                        <div class="card-block">
-                            <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea" name="comment"></textarea>
-                            <input type="submit" class="main_btn" value="Comment">
-                        </div>
-                      </form>
-                    </div>
+                  {% for reply in comment.replies.all %}
+                  <div class="comment-box replied">
+                    <span class="commenter-pic">
+                      <img src="https://www.uiuxstream.com/images/user-icon.jpg" class="img-fluid">
+                    </span>
+                    <span class="commenter-name">
+                      <a href="#">Happy uiuxStream</a> <span class="comment-time">2 hours ago</span>
+                    </span>       
+                    <p class="comment-txt more text-center">{{reply.reply}}</p>
+                  </div>
+                  {% endfor %}
                 </div>
+                {% endfor %}
+              </div>
             </div>
+          </div>
         </div>
-    
     </div>
     <div class="site-section">
       <div class="container">

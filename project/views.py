@@ -64,7 +64,7 @@ def project(request,project_id):
             
             # get project comments
             comments = project_comments.objects.filter(project_id=project_id)
-
+            print (f"reply to this: {project.comments.first().replies.all()}")
             context = {
                   "images": pics,
                   "project": project,
