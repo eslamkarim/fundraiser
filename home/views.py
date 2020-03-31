@@ -40,3 +40,5 @@ def search(request):
     return render(request, 'home/search.html', {"projects": projects})
 
 
+def contact(request):
+    return render(request, 'home/contact.html' )
