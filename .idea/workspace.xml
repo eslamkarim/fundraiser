@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cd44ba33-3c79-4e5e-9c03-70e4038b26e2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/home/templates/home/featured_projects.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/featured_projects.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/latest_project.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/latest_project.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home/templates/home/featured_projects.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="42" column="8" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+            <state relative-caret-position="108">
+              <caret line="6" column="53" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
               <folding>
                 <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
                 <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -73,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/home/templates/home/latest_project.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="78" column="12" selection-start-line="78" selection-start-column="12" selection-end-line="78" selection-end-column="12" />
+            <state>
+              <caret lean-forward="true" />
               <folding>
                 <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
                 <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -145,8 +144,8 @@
         <option value="$PROJECT_DIR$/templates/nav.html" />
         <option value="$PROJECT_DIR$/project/models.py" />
         <option value="$PROJECT_DIR$/home/views.py" />
-        <option value="$PROJECT_DIR$/home/templates/home/featured_projects.html" />
         <option value="$PROJECT_DIR$/home/templates/home/latest_project.html" />
+        <option value="$PROJECT_DIR$/home/templates/home/featured_projects.html" />
       </list>
     </option>
   </component>
@@ -240,12 +239,12 @@
       <workItem from="1585505356201" duration="6454000" />
       <workItem from="1585564244037" duration="8167000" />
       <workItem from="1585588177380" duration="7782000" />
-      <workItem from="1585655745572" duration="13470000" />
+      <workItem from="1585655745572" duration="13707000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50047000" />
+    <option name="totallyTimeSpent" value="50284000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
@@ -493,10 +492,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/home/latest_project.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+          <folding>
+            <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#div#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/home/templates/home/featured_projects.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="42" column="8" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+        <state relative-caret-position="108">
+          <caret line="6" column="53" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
           <folding>
             <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
             <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -508,23 +524,6 @@
             <element signature="n#a#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" />
             <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#div#3;n#div#1;n#div#0;n#div#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/home/templates/home/latest_project.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="78" column="12" selection-start-line="78" selection-start-column="12" selection-end-line="78" selection-end-column="12" />
-          <folding>
-            <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
-            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" />
-            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" />
-            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#!!top" />
-            <element signature="n#div#2;n#div#0;n#div#0;n#!!top" />
           </folding>
         </state>
       </provider>
