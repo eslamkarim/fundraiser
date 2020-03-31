@@ -205,9 +205,9 @@
                   </span>       
                   <p class="comment-txt more text-center">{{comment.comment}}</p>
                   <div class="comment-meta">
-                    <button class="comment-reply reply-popup" onclick='fun({{comment.id}})'><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>  
+                    <button class="comment-reply reply-popup" onclick='$("#{{comment.id}}").toggle()'><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>  
                   </div>
-                  <div id='{{comment.id}}' class="comment-box add-comment reply-box row" style="display: none;">
+                  <div id="{{comment.id}}" class="comment-box add-comment reply-box row" style="display: none;">
                     <span class="commenter-name w-100">
                       <input class="col-7" type="text" placeholder="Add a public reply" name="Add Comment">
                       <button type="submit" class="btn btn-outline-primary col-1">Reply</button>
