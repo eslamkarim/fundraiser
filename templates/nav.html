@@ -21,8 +21,15 @@
 	<!-- main css -->
 	<link rel="stylesheet" href="{{ STATIC_URL }} /static/css/style.css">
 	<link rel="stylesheet" href="{{ STATIC_URL }} /static/css/responsive.css">
+
+
+	{% block css_link_block %}
+
+    {% endblock %}
+
 	{% block style_block %}
-{% endblock %}
+	{% endblock %}
+
 </head>
 
 <body>
@@ -81,9 +88,6 @@
 									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="contact.html">Contact</a>
-									</li>
-									<li class="nav-item">
-										<a class="main_btn" href="donation.html">donate now</a>
 									</li>
 								</ul>
 							</div>
@@ -156,7 +160,13 @@
 	<script src="{{ STATIC_URL }} /static/vendors/nice-select/js/jquery.nice-select.min.js"></script>
 	<script src="{{ STATIC_URL }} /static/js/jquery.ajaxchimp.min.js"></script>
 	<script src="{{ STATIC_URL }} /static/js/custom.js"></script>
+
+
+
+
+	{% block js_link_block %}
+	{% endblock %}
 	{% block script_block %}
-{% endblock %}
+    {% endblock %}
 </body>
 </html>

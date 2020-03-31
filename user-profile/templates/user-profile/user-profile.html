@@ -1,18 +1,18 @@
-<!--{% extends "nav.html" %}-->
-<!--{% block body_block %}-->
-<!--<section class="section_gap">-->
+{% extends "nav.html" %}
+{% block body_block %}
+<section class="section_gap">
 
-<!--   <table border="0" width="800" height="250">-->
-<!--       <tr><th colspan="100">ID:    </th><th colspan="200">{{data.id}}</th></tr>-->
-<!--       <tr><th colspan="100">Name:  </th><th colspan="200">{{data.name}}</th></tr>-->
-<!--       <tr><th colspan="100">Phone: </th><th colspan="200">{{data.phone}}</th></tr>-->
-<!--       <tr><th colspan="100">Email: </th><th colspan="200">{{data.mail}}</th></tr>-->
-<!--       <tr><th colspan="100">Country: </th><th colspan="200">{{data.country}}</th></tr>-->
-<!--       <tr><th colspan="100">Facebook account: </th><th colspan="200"><a href="{{data.facebook}}"> {{data.facebook}}</a></th></tr>-->
-<!--   </table>-->
-<!--    <h3>your projects :</h3>-->
-<!--     {% for book in data %}-->
-<!--       <li>{{data.user.title}}</li>-->
-<!--     {% endfor %}-->
-<!--    </section>-->
-<!--{% endblock %}-->
+   <table border="0" width="800" height="250">
+       <tr><th colspan="100">ID:    </th><th colspan="200">{{data.id}}</th></tr>
+       <tr><th colspan="100">Name:  </th><th colspan="200">{{data.name}}</th></tr>
+       <tr><th colspan="100">Phone: </th><th colspan="200">{{data.phone}}</th></tr>
+       <tr><th colspan="100">Email: </th><th colspan="200">{{data.mail}}</th></tr>
+       <tr><th colspan="100">Country: </th><th colspan="200">{{data.country}}</th></tr>
+       <tr><th colspan="100">Facebook account: </th><th colspan="200"><a href="{{data.facebook}}"> {{data.facebook}}</a></th></tr>
+   </table>
+    <h3>your projects :</h3>
+     {% for book in data %}
+       <li>{{data.user.title}}</li>
+     {% endfor %}
+    </section>
+{% endblock %}
