@@ -41,7 +41,8 @@
 
                   </div>
               </div>
-            <div class="col-md-4">
+            {% if context.latest_projects.1 %}
+                <div class="col-md-4">
 
                 <div class="cause shadow-sm">
 
@@ -74,7 +75,9 @@
                   </div>
 
               </div>
-            <div class="col-md-4">
+            {% endif %}
+            {% if context.latest_projects.2 %}
+                <div class="col-md-4">
 
                 <div class="cause shadow-sm">
 
@@ -107,7 +110,7 @@
                   </div>
 
               </div>
-
+            {% endif %}
             <div class="container">
                 <form method="GET" action="search" id="searchform">
             <div class="row">
