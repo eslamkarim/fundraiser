@@ -13,7 +13,7 @@
                   <div class="cause shadow-sm">
 
                     <a href="/project/{{ context.featured_projects.0.id }}" class="cause-link d-block">
-                      <img src="{{ context.featured_projects.0.cover.url }}" alt="Image" class="img-fluid">
+                      <img src="{{ context.featured_projects.0.cover.url }}" alt="Image" class="img-fluid" style="height: 250px">
                       <div class="custom-progress-wrap">
                         <span class="caption">{% widthratio context.featured_projects.0.current_money context.featured_projects.0.target 100 %}% complete</span>
                         <div class="custom-progress-inner">
@@ -45,7 +45,7 @@
                 <div class="cause shadow-sm">
 
                     <a href="/project/{{ context.featured_projects.1.id }}" class="cause-link d-block">
-                      <img src="{{ context.featured_projects.1.cover.url }}" alt="Image" class="img-fluid">
+                      <img src="{{ context.featured_projects.1.cover.url }}" alt="Image" class="img-fluid" style="height: 250px">
                       <div class="custom-progress-wrap">
                         <span class="caption">{% widthratio context.featured_projects.1.current_money context.featured_projects.1.target 100 %}% complete</span>
                         <div class="custom-progress-inner">
@@ -78,7 +78,7 @@
                 <div class="cause shadow-sm">
 
                     <a href="/project/{{ context.featured_projects.2.id }}" class="cause-link d-block">
-                      <img src="{{ context.featured_projects.2.cover.url }}" alt="Image" class="img-fluid">
+                      <img src="{{ context.featured_projects.2.cover.url }}" alt="Image" class="img-fluid" style="height: 250px">
                       <div class="custom-progress-wrap">
                         <span class="caption">{% widthratio context.featured_projects.2.current_money context.featured_projects.2.target 100 %}% complete</span>
                         <div class="custom-progress-inner">
@@ -117,9 +117,7 @@
     </div>
         </div>
     {% else %}
-        <div class="col justify-content-center">
-            <h2 class="text-cursive">Sorry no projects yet</h2>
-        </div>
+
     {% endif %}
   </div>
 </div>

@@ -7,13 +7,13 @@ from django.db.models import Q
 
 def home(request):
     latest_projects = Project_data.objects.order_by('-created_at')[:3]
-    featured_projects = Project_data.objects.order_by('-rating')[:3]
+    featured_projects = list(Project_data.objects.filter(featured=True))
     categories = list(Category.objects.all())
     shuffle(categories)
-
+    shuffle(featured_projects)
     context = {
         "latest_projects": latest_projects,
-        "featured_projects": featured_projects,
+        "featured_projects": featured_projects[:3],
         "categories": categories[:3]
     }
 

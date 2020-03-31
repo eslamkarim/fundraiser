@@ -14,6 +14,8 @@ class Project_data(models.Model):
   current_money = models.IntegerField(default=0)
   created_at = models.DateTimeField(auto_now_add=True)
   cover = models.ImageField(upload_to='project_images')
+  featured = models.BooleanField(default=False)
+
   def __str__(self):
     return self.title
   

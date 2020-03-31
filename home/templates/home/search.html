@@ -24,14 +24,23 @@
 {% block body_block %}
 
     <section class="section_gap">
-             <div class="container">
+        <div class="container">
+            <form method="GET" action="search" id="searchform">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <input class="searchfield form-control form-control-lg" id="searchbox" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search for project ..."/>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="container">
                 <div class="row">
                     {% for project in projects %}
                         <div class="filterDiv mt-4 {{ project.category }} col-md-4">
                           <div class="cause shadow-sm">
 
                             <a href="/project/{{ project.id }}" class="cause-link d-block">
-                              <img src="{{ project.cover.url }}" alt="Image" class="img-fluid">
+                              <img src="{{ project.cover.url }}" alt="Image" class="img-fluid" style="height: 250px">
                               <div class="custom-progress-wrap">
                                 <span class="caption">{% widthratio project.current_money project.target 100 %}% complete</span>
                                 <div class="custom-progress-inner">
