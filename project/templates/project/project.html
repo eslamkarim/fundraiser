@@ -304,16 +304,4 @@
 {% endblock %}
 {% block script_block %}
 <script src="{{ STATIC_URL }} /static/project/js/project.js"></script>
-<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-<script>
-  function fun(id){
-    var x = document.getElementById(`${id}`);
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  }
-
-</script>
 {% endblock %}
