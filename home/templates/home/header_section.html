@@ -14,29 +14,33 @@
 <div class="container">
     <div class="feature-29192-wrap d-md-flex" style="margin-top: -20px; position: relative; z-index: 2;">
 
-        <a href="categories" class="feature-29192 overlay-danger" style="background-image: url('{{ STATIC_URL }} /static/home/images/img_3_gray.jpg');">
+        {% if context.categories %}
+
+            <a href="categories" class="feature-29192 overlay-danger" style="background-image: url('{{ STATIC_URL }} /static/home/images/img_3_gray.jpg');">
           <div class="text">
             <h3 class="text-cursive text-white h1">{{ context.categories.0 }}</h3>
           </div>
         </a>
 
-        <a href="categories" class="feature-29192 overlay-success" style="background-image: url('{{ STATIC_URL }} /static/home/images/img_2_gray.jpg');">
+            <a href="categories" class="feature-29192 overlay-success" style="background-image: url('{{ STATIC_URL }} /static/home/images/img_2_gray.jpg');">
           <div class="text">
             <h3 class="text-cursive text-white h1">{{ context.categories.1 }}</h3>
           </div>
         </a>
 
-        <a href="categories" class="feature-29192 overlay-warning" style="background-image: url('{{ STATIC_URL }} /static/home/images/img_1_gray.jpg');">
+            <a href="categories" class="feature-29192 overlay-warning" style="background-image: url('{{ STATIC_URL }} /static/home/images/img_1_gray.jpg');">
           <div class="text">
             <h3 class="text-cursive text-white h1">{{ context.categories.2 }}</h3>
           </div>
         </a>
 
-        <a href="categories" class="feature-29192 overlay-success" style="background-image: url('{{ STATIC_URL }} /static/home/images/img_2_gray.jpg');">
+            <a href="categories" class="feature-29192 overlay-success" style="background-image: url('{{ STATIC_URL }} /static/home/images/img_2_gray.jpg');">
           <div class="text">
             <h3 class="text-cursive text-white h1">Others</h3>
           </div>
         </a>
+
+        {% endif %}
 
     </div>
 </div>

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from random import shuffle
 from project.models import Project_data, Category, project_tags,  Project_pics
-
+from django.db.models import Q
 # Create your views here.
 
 
@@ -32,3 +32,11 @@ def categories(request):
     }
 
     return render(request, 'home/categories.html', {"context": context })
+
+
+def search(request):
+    q = request.GET.get("q")
+    projects = Project_data.objects.filter(Q(title__icontains=q)|Q(tags__tag__icontains=q))
+    return render(request, 'home/search.html', {"projects": projects})
+
+

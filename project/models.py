@@ -39,7 +39,7 @@ class project_comments(models.Model):
     return self.comment
 
 class project_tags(models.Model):
-  project = models.ForeignKey('Project_data',on_delete=models.CASCADE)
+  project = models.ForeignKey('Project_data', on_delete=models.CASCADE, related_name="tags")
   tag = models.CharField(max_length=50)  
   
   def __str__(self):
