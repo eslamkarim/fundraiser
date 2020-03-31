@@ -1,18 +1,30 @@
 {% extends "nav.html" %}
+{% block head%}
+<title>profile</title>
+{% endblock%}
 {% block body_block %}
 <section class="section_gap">
+<div class="container">
+<h2 style="text-align:center">{{data.name}}</h2>
 
-   <table border="0" width="800" height="250">
-       <tr><th colspan="100">ID:    </th><th colspan="200">{{data.id}}</th></tr>
-       <tr><th colspan="100">Name:  </th><th colspan="200">{{data.name}}</th></tr>
-       <tr><th colspan="100">Phone: </th><th colspan="200">{{data.phone}}</th></tr>
-       <tr><th colspan="100">Email: </th><th colspan="200">{{data.mail}}</th></tr>
-       <tr><th colspan="100">Country: </th><th colspan="200">{{data.country}}</th></tr>
-       <tr><th colspan="100">Facebook account: </th><th colspan="200"><a href="{{data.facebook}}"> {{data.facebook}}</a></th></tr>
-   </table>
-    <h3>your projects :</h3>
-     {% for book in data %}
-       <li>{{data.user.title}}</li>
-     {% endfor %}
+<div class="card">
+    <br>
+
+   <ul border="0" width="800" height="150">
+       <li><b>First Name:</b> {{data.f_name}}</li><li><b>Last Name: </b>{{data.l_name}}</li>
+       <li><b>Phone: </b>{{data.phone}}</li><li><b>Email:</b> {{data.mail}}</li>
+       <li><b>Country:</b>{{data.country}}</li><li><b>Birth Date:</b> {{data.birth_date}}</li>
+       <li><b>Facebook account:</b> <a href="{{data.facebook}}"> {{data.facebook}}</a></li>
+   </ul>
+    <br>
+    <p>**********************************************************************************************************************</p>
+    <h3>Your projects</h3>
+    <p>   {{ p_data.details }}</p>
+    <p>   {{ p_data.project_title }}</p>
+    <p>    {{ p_data.target}}</p>
+</div>
+</div>
+
     </section>
 {% endblock %}
+
