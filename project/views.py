@@ -120,3 +120,17 @@ def report(request,project_id):
             return redirect(f"/project/{project_id}")
       else:
             return redirect(f"/project/{project_id}")
+      
+def rate(request,project_id):
+      if request.method == 'POST':
+            if int(request.POST.get('rating',-1)) > 0 and int(request.POST.get('rating',-1)) < 6:
+                  project = Project_data.objects.get(id=project_id)
+                  project.rating = (int(request.POST.get('rating'))+project.rating)/2
+                  project.save()
+                  messages.success(request, 'Your rating done successfully!', extra_tags='rate')
+                  return redirect(f"/project/{project_id}")
+            else:
+                  messages.error(request, 'Your rating failed', extra_tags='rate')
+                  return redirect(f"/project/{project_id}")
+      else:
+            return redirect(f"/project/{project_id}")
