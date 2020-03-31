@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'project',
     'widget_tweaks',
     'mathfilters',
+    'edit_profile'
 
 ]
 
