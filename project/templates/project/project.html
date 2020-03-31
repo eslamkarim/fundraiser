@@ -1,6 +1,7 @@
 {% extends "nav.html" %}
 {% block style_block %}
 <link rel="stylesheet" href="{{ STATIC_URL }} /static/project/css/project.css">
+
 {% endblock %}
 {% block body_block %}
 <section class="home_banner_area h-auto">
@@ -21,6 +22,7 @@
                 {% endfor %}
                 </div>
                 <ol class="carousel-indicators">
+                  
                     {% for image in images %}
                         {% if forloop.counter0 == 0 %}
                             <li data-target="#carouselExampleCaptions" data-slide-to="{{forloop.counter0}}" class="active"></li>
@@ -35,6 +37,20 @@
 </section>
 <section class="make_donation section_gap">
     <div class="container">
+      <div>
+        {%for message in messages %}
+          {%if "report" in message.tags %}
+            <ul class="messages" style="list-style-type: none;">
+              {% for message in messages %}
+              <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                  <li class="{{ message.tags }}">{{ message }}</li>
+              </div>
+              {% endfor %}
+          </ul>
+          {% endif %}
+          {%endfor%}
+
+        </div>
         <div class="row justify-content-start section-title-wrap">
             <div class="col-11 text-lg-left">
                 <h1 style="border-bottom: solid lightgrey ;">
@@ -42,8 +58,11 @@
                 </h1>
               </div>
           <div class="col-1 text-lg-left">
-                
+            <form enctype="multipart/form-data" action="{% url 'report' project.id %}" method="post" > 
+              {% csrf_token %}
+
                 <input type="submit" value="report" class="btn btn-danger">
+            </form>
           </div>
         <div class="col-7 text-left">
             <p>
@@ -82,8 +101,9 @@
               </div>
             <div class="card justify-content-center w-100 bg-white rounded-lg p-5 shadow">
                 <div>
-                    {% if messages %}
-                    <ul class="messages" style="list-style-type: none;">
+                  {%for message in messages %}
+                    {%if "donate" in message.tags %}
+                      <ul class="messages" style="list-style-type: none;">
                         {% for message in messages %}
                         <div class="alert {{ message.tags }} alert-dismissible" role="alert">
                             <li class="{{ message.tags }}">{{ message }}</li>
@@ -91,7 +111,9 @@
                         {% endfor %}
                     </ul>
                     {% endif %}
-                <div>
+                    {%endfor%}
+
+                  </div>
                 <div class="card-body">
               
                   <h2 class="text-center mt-3 mb-4 pb-4"><strong>Donate Now</strong></h2>
@@ -183,7 +205,7 @@
                   </span>       
                   <p class="comment-txt more text-center">{{comment.comment}}</p>
                   <div class="comment-meta">
-                    <button class="comment-reply reply-popup" onclick="$('#{{comment.id}}').toggle()"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>  
+                    <button class="comment-reply reply-popup" onclick='fun({{comment.id}})'><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>  
                   </div>
                   <div id='{{comment.id}}' class="comment-box add-comment reply-box row" style="display: none;">
                     <span class="commenter-name w-100">
@@ -267,4 +289,15 @@
 {% endblock %}
 {% block script_block %}
 <script src="{{ STATIC_URL }} /static/project/js/project.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script>
+  function fun(id){
+    var x = document.getElementById(`${id}`);
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
 {% endblock %}

@@ -87,10 +87,10 @@ def donate(request,project_id):
             project.current_money += int(request.POST.get('donation_value'))
             if project.current_money <= project.target:
                   project.save()
-                  messages.success(request, 'Your Donation done successfully!')
+                  messages.success(request, 'Your Donation done successfully!', extra_tags='donate')
                   return redirect(f"/project/{project_id}")
             else:
-                  messages.error(request, 'Your Donation failed')
+                  messages.error(request, 'Your Donation failed', extra_tags='donate')
                   return redirect(f"/project/{project_id}")
       else:
             return redirect(f"/project/{project_id}")
@@ -107,5 +107,16 @@ def comment(request,project_id):
                   return redirect(f"/project/{project_id}")
             else:
                   return redirect(f"/project/{project_id}")
+      else:
+            return redirect(f"/project/{project_id}")
+      
+      
+def report(request,project_id):
+      if request.method == 'POST':
+            project = Project_data.objects.get(id=project_id)
+            project.reports += 1 
+            project.save()
+            messages.success(request, 'Your report done successfully!', extra_tags='report')
+            return redirect(f"/project/{project_id}")
       else:
             return redirect(f"/project/{project_id}")
