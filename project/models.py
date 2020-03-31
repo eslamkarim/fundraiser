@@ -33,7 +33,7 @@ class Project_pics(models.Model):
     return self.project.title
   
 class project_comments(models.Model):
-  project = models.ForeignKey('Project_data',on_delete=models.CASCADE)
+  project = models.ForeignKey('Project_data',related_name='comments',on_delete=models.CASCADE)
   comment = models.TextField()
   
   def __str__(self):
@@ -45,4 +45,9 @@ class project_tags(models.Model):
   
   def __str__(self):
     return self.project.title + " - " + self.tag
+
+class project_comment_replies(models.Model):
+      comment = models.ForeignKey('Project_comments',related_name='replies',on_delete=models.CASCADE)
+      reply = models.TextField()
+
 
