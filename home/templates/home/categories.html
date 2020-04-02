@@ -28,57 +28,73 @@
 
     <section class="section_gap">
 
-        <!-- Control buttons -->
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div id="myBtnContainer ">
-                      <button class="btn active" onclick="filterSelection('all')"> Show all</button>
-                        {% for category in context.categories %}
-                          <button class="btn" onclick="filterSelection('{{ category.name }}')"> {{ category.name }}</button>
+        {% if context.categories %}
+            <div class="container">
+            <form method="GET" action="search" id="searchform">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <input class="searchfield form-control form-control-lg" id="searchbox" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search for project ..."/>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+            <!-- Control buttons -->
+            <div class="container">
+                <div class="row">
+                    <div class="col mt-3">
+                        <div id="myBtnContainer ">
+                          <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+                            {% for category in context.categories %}
+                              <button class="btn" onclick="filterSelection('{{ category.name }}')"> {{ category.name }}</button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <!-- The filterable elements. Note that some have multiple class names (this can be used if they belong to multiple categories) -->
+                <div class="container">
+                    <div class="row">
+                        {% for project in context.projects %}
+                            <div class="filterDiv mt-4 {{ project.category }} col-md-4">
+                              <div class="cause shadow-sm">
+
+                                <a href="/project/{{ project.id }}" class="cause-link d-block">
+                                  <img src="{{ project.cover.url }}" alt="Image" class="img-fluid" style="height: 250px">
+                                  <div class="custom-progress-wrap">
+                                    <span class="caption">{% widthratio project.current_money project.target 100 %}% complete</span>
+                                    <div class="custom-progress-inner">
+                                      <div class="custom-progress bg-danger" style="width:{% widthratio project.current_money project.target 100 %}%;"></div>
+                                    </div>
+                                  </div>
+                                </a>
+
+                                <div class="px-3 pt-3 border-top-0 border border shadow-sm">
+                                  <span class="badge-danger py-1 small px-2 rounded mb-3 d-inline-block">{{ project.category }}</span>
+                                  <h3 class="mb-4"><a href="/project/{{ project.id }}">{{ project.title }}</a></h3>
+                                  <div class="border-top border-light border-bottom py-2 d-flex">
+                                    <div>Donated</div>
+                                    <div class="ml-auto"><strong class="text-primary">{{ project.current_money }} E.G</strong></div>
+                                  </div>
+
+                                  <div class="py-4">
+                                    <div class="d-flex align-items-center">
+                                      <img src="{{ STATIC_URL }} /static/home/images/person_1.jpg" alt="Image" class="rounded-circle mr-3" width="50">
+                                      <div class="">{{ project.user.user_first_name }} {{ project.user.user_last_name }}</div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                          </div>
                         {% endfor %}
                     </div>
                 </div>
             </div>
-            <!-- The filterable elements. Note that some have multiple class names (this can be used if they belong to multiple categories) -->
-            <div class="container">
-                <div class="row">
-                    {% for project in context.projects %}
-                        <div class="filterDiv mt-4 {{ project.category }} col-md-4">
-                          <div class="cause shadow-sm">
-
-                            <a href="/project/{{ project.id }}" class="cause-link d-block">
-                              <img src="{{ project.cover.url }}" alt="Image" class="img-fluid">
-                              <div class="custom-progress-wrap">
-                                <span class="caption">{% widthratio project.current_money project.target 100 %}% complete</span>
-                                <div class="custom-progress-inner">
-                                  <div class="custom-progress bg-danger" style="width:{% widthratio project.current_money project.target 100 %}%;"></div>
-                                </div>
-                              </div>
-                            </a>
-
-                            <div class="px-3 pt-3 border-top-0 border border shadow-sm">
-                              <span class="badge-danger py-1 small px-2 rounded mb-3 d-inline-block">{{ project.category }}</span>
-                              <h3 class="mb-4"><a href="/project/{{ project.id }}">{{ project.title }}</a></h3>
-                              <div class="border-top border-light border-bottom py-2 d-flex">
-                                <div>Donated</div>
-                                <div class="ml-auto"><strong class="text-primary">{{ project.current_money }} E.G</strong></div>
-                              </div>
-
-                              <div class="py-4">
-                                <div class="d-flex align-items-center">
-                                  <img src="{{ STATIC_URL }} /static/home/images/person_1.jpg" alt="Image" class="rounded-circle mr-3" width="50">
-                                  <div class="">James Smith</div>
-                                </div>
-                              </div>
-                            </div>
-
-                          </div>
-                      </div>
-                    {% endfor %}
-                </div>
+        {% else %}
+            <div class="col justify-content-center">
+                <h2 class="text-cursive">Sorry no categories yet</h2>
             </div>
-        </div>
+        {% endif %}
     </section>
 {% endblock %}
 

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from random import shuffle
 from project.models import Project_data, Category, project_tags,  Project_pics
 
-from .models import User
+from user.models import User
 
 
 # def userProfile(request):#id
