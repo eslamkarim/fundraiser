@@ -1,4 +1,4 @@
-import random
+import random, string
 import smtplib
 import re
 from django.shortcuts import render, redirect
@@ -14,6 +14,10 @@ def generate_sign_up_code():
     sign_up_code = random.getrandbits(32)
     return sign_up_code
 
+def randomStringDigits(stringLength=11):
+    """Generate a random string of letters and digits """
+    lettersAndDigits = string.ascii_letters + string.digits
+    return ''.join(random.choice(lettersAndDigits) for i in range(stringLength))
 
 def send_sign_up_validation_email(user_name, user_email_address):
     # vars to declare sending the email
@@ -24,7 +28,8 @@ def send_sign_up_validation_email(user_name, user_email_address):
     server.login(sender_email_address, sender_email_password)
     try:
         # getting the user key.
-        user_sign_up_code = generate_sign_up_code()
+        #user_sign_up_code = generate_sign_up_code()
+        user_sign_up_code = randomStringDigits()
         # Putting the user name and user code in the validation email to the user.
         reading_file = open("user/email_forms/email_validation_form.txt", "r")
         new_file_content = ""
@@ -159,7 +164,7 @@ def sign_up(request):
             }
 
             validation_code = send_sign_up_validation_email(user_full_name, email_address)
-            if validation_code > 0:
+            if validation_code:
                 user_instance = User(user_first_name=first_name,
                                      user_last_name=last_name,
                                      user_email_address=email_address,

@@ -9,5 +9,5 @@ class User(models.Model):
     user_email_address = models.EmailField()
     user_password = models.CharField(max_length=250)
     sign_up_date = models.DateTimeField(auto_now_add=True, blank=True)
-    verification_code = models.IntegerField()
+    verification_code = models.CharField(max_length=20)
     is_verified_user = models.BooleanField(default=False)
