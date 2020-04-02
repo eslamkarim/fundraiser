@@ -11,7 +11,7 @@ def home(request):
 
 
 def generate_sign_up_code():
-    sign_up_code = random.getrandbits(32)
+    sign_up_code = random.getrandbits(16)
     return sign_up_code
 
 
@@ -148,7 +148,7 @@ def sign_up(request):
         user_full_name = first_name + " " + last_name
         if (check_first_last_names(first_name, last_name)) and \
                 (check_phone(phone_number)) and (check_email(email_address)) and \
-                (check_password(password, conf_password)):
+                (check_password(password, conf_password) and (is_email_exist(email_address) == False)):
             user = {
                 'first_name': first_name,
                 'last_name': last_name,
@@ -164,7 +164,7 @@ def sign_up(request):
                                      user_last_name=last_name,
                                      user_email_address=email_address,
                                      user_password=password,
-                                     verification_code= validation_code)
+                                     verification_code=validation_code)
                 user_instance.save()
                 return render(request, 'user/code_validation.html')
             else:
@@ -184,7 +184,7 @@ def sign_in(request):
                 logged_user = User.objects.get(user_email_address=email, user_password=password)
                 if logged_user.is_verified_user:
                     request.session['logged_in_user'] = logged_user.user_id
-                    return render(request, 'user/logged_in.html')
+                    return render(request, 'home/home.html')
                 else:
                     return render(request, 'user/code_validation.html')
             except:
@@ -195,9 +195,10 @@ def sign_in(request):
 def sign_out(request):
     try:
         del request.session['logged_in_user']
+        return render(request, 'home/home.html')
     except KeyError:
         pass
-    return render(request, 'user/home.html')
+    return render(request, 'home/home.html')
 
 
 def code_validation(request):
@@ -207,12 +208,13 @@ def code_validation(request):
             try:
                 is_code_exist = User.objects.get(verification_code=user_code)
                 if is_code_exist:
-                    User.objects.filter(verification_code=user_code, is_verified_user=False).update(is_verified_user=True)
-                    return render(request, 'user/valid_code.html')
+                    User.objects.filter(verification_code=user_code, is_verified_user=False).update(
+                        is_verified_user=True)
+                    return render(request, 'home/home.html')
                 else:
                     return render(request, 'user/invalid_code.html')
             except:
-                return render(request, 'user/home.html')
+                return render(request, 'home/home.html')
     return render(request, 'user/code_validation.html')
 
 
@@ -222,6 +224,8 @@ def is_email_exist(email):
             is_exist = User.objects.get(user_email_address=email)
             if is_exist:
                 return is_exist
+            else:
+                return False
         except:
             return False
     return False
