@@ -32,7 +32,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light">
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
-					<a class="navbar-brand logo_h" href="index.html">
+					<a class="navbar-brand logo_h" href="{% url 'home' %}">
 						<img src="{{ STATIC_URL }} /static/img/logo.png" alt="">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -85,11 +85,11 @@
 									</li>
 
 									<li class="nav-item">
-										<a class="nav-link" href="signup">Sign up</a>
+										<a class="nav-link" href="{% url 'sign_up' %}">Sign up</a>
 									</li>
 
 									<li class="nav-item">
-										<a class="nav-link" href="signin">Sign in</a>
+										<a class="nav-link" href="{% url 'sign_in' %}">Sign in</a>
 									</li>
 
 									<li class="nav-item">

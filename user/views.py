@@ -7,7 +7,7 @@ from .models import User
 
 
 def home(request):
-    return render(request, 'user/home.html')
+    return render(request, 'home/home.html')
 
 
 def generate_sign_up_code():
