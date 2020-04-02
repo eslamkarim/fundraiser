@@ -218,6 +218,13 @@
                   <span class="commenter-name">
                     <a href="#">{{comment.comment_user.user_first_name}} {{comment.comment_user.user_last_name}}</a> <span class="comment-time">2 hours ago</span>
                   </span>       
+                  <div class="col-1 text-lg-left">
+                    <form enctype="multipart/form-data" action="{% url 'report_comment' project.id comment.id %}" method="post" > 
+                      {% csrf_token %}
+
+                        <input type="submit" value="report" class="btn btn-danger">
+                    </form>
+                  </div>
                   <p class="comment-txt more text-center">{{comment.comment}}</p>
                   <div class="comment-meta">
                     <button class="comment-reply reply-popup" onclick='$("#{{comment.id}}").toggle()'><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>  

@@ -1,5 +1,5 @@
 from django.urls import path,include
-from .views import create, project, donate, error, comment, report, rate
+from .views import create, project, donate, error, comment, report, rate, report_comment
 
 urlpatterns = [
     path('create/', create, name='create'),
@@ -7,6 +7,7 @@ urlpatterns = [
     path('<int:project_id>/donate/',donate, name='donate'),
     path('<int:project_id>/comment/',comment, name='comment'),
     path('<int:project_id>/report/',report, name='report'),
+    path('<int:project_id>/report_comment/<int:comment_id>',report_comment, name='report_comment'),
     path('<int:project_id>/rate/',rate, name='rate'),
     path('error', error)
 
