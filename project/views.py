@@ -74,11 +74,19 @@ def project(request, project_id):
 
         # get project comments
         comments = project_comments.objects.filter(project_id=project_id)
+        if 'logged_in_user' in request.session:
+            if request.session['logged_in_user'] == project.user_id:
+    	        project_owner = True
+            else:
+    	        project_owner = False
+        else:
+            project_owner = False
         context = {
             "images": pics,
             "project": project,
             "comments": comments,
-            "related_projects_list": related_projects_data
+            "related_projects_list": related_projects_data,
+			"owner": project_owner
         }
         print(context)
 

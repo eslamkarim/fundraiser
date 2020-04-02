@@ -58,11 +58,17 @@
                 </h1>
               </div>
           <div class="col-1 text-lg-left">
-            <form enctype="multipart/form-data" action="{% url 'report' project.id %}" method="post" > 
-              {% csrf_token %}
-
-                <input type="submit" value="report" class="btn btn-danger">
-            </form>
+            {%if owner %}
+                <form enctype="multipart/form-data" action="{% url 'report' project.id %}" method="post" > 
+                  {% csrf_token %}
+                    <input type="submit" value="Cancel" class="btn btn-danger">
+                </form>
+            {% else %}      
+              <form enctype="multipart/form-data" action="{% url 'report' project.id %}" method="post" > 
+                {% csrf_token %}
+                  <input type="submit" value="report" class="btn btn-danger">
+              </form>
+            {% endif %}
           </div>
         <div class="col-7 text-left">
             <p>
@@ -229,10 +235,9 @@
                   <span class="commenter-name">
                     <a href="#">{{comment.comment_user.user_first_name}} {{comment.comment_user.user_last_name}}</a> <span class="comment-time">2 hours ago</span>
                   </span>       
-                  <div class="col-1 text-lg-left">
+                  <div class="text-lg-left float-right">
                     <form enctype="multipart/form-data" action="{% url 'report_comment' project.id comment.id %}" method="post" > 
                       {% csrf_token %}
-
                         <input type="submit" value="report" class="btn btn-danger">
                     </form>
                   </div>
@@ -246,7 +251,6 @@
                       <span class="commenter-name w-100">
                         <input class="col-7" type="text" placeholder="Add a public reply" name="reply">
                         <button type="submit" class="btn btn-outline-primary col-1">Reply</button>
-                        <a class="float-right btn btn-default reply-popup col-1">Cancel</a>
                       </span>
                     </form>
                   </div>
