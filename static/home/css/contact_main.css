@@ -33,7 +33,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-	color: #eb4d5d;
+	color: #eb2d5d;
 }
 
 /*---------------------------------------------*/
@@ -242,7 +242,7 @@ textarea.input1 + .shadow-input1 {
   min-width: 193px;
   height: 50px;
   border-radius: 25px;
-  background: #eb4d5d;
+  background: #eb2d5d;
   font-family: Montserrat-Bold;
   font-size: 15px;
   line-height: 1.5;

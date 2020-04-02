@@ -219,6 +219,7 @@ a {
       margin-right: 45px;
       padding: 10px 0; }
       .header_area .navbar .nav .nav-item .main_btn {
+        background-color: #eb2d5d;
         margin-top: 15px; }
       .header_area .navbar .nav .nav-item .nav-link {
         font: 500 12px/80px "Roboto", sans-serif;
