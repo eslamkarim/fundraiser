@@ -1,8 +1,9 @@
 {% extends "nav.html" %}
+{% load static %}
 {% block head%}
 <title>profile</title>
 {% endblock%}
-{% block body %}
+{% block body_block %}
 <section class="section_gap">
 <!--<div class="container">-->
 <!--<form method="post">-->
@@ -11,33 +12,11 @@
 <!--    <button type="submit">Submit</button>-->
 <!--</form>-->
 <!--</div>-->
-    <!DOCTYPE html>
-<html lang="en">
 <head>
-	<title>Contact V14</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href= "{% static 'css/edit_profile.css' %}" >
 <!--===============================================================================================-->
 </head>
 <body>
@@ -45,24 +24,24 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form">
+			<form class="contact100-form validate-form" >
 				<span class="contact100-form-title">
-					Contact Us
+					Edit your data
 				</span>
 
 				<label class="label-input100" for="first-name">Your Name *</label>
 				<div class="wrap-input100 rs1 validate-input">
-					<input id="first-name" class="input100" type="text" name="first-name" placeholder="First name">
+					<input id="first-name" class="input100" type="text" name="first-name" placeholder="First name" value= "{{data.user_first_name }}">
 					<span class="focus-input100"></span>
 				</div>
 				<div class="wrap-input100 rs1 validate-input">
-					<input class="input100" type="text" name="last-name" placeholder="Last name">
+					<input class="input100" type="text" name="last-name" placeholder="Last name" value="{{data.user_last_name }}">
 					<span class="focus-input100"></span>
 				</div>
 
 				<label class="label-input100" for="email">Email Address *</label>
 				<div class="wrap-input100 validate-input">
-					<input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com">
+					<input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com" value="{{data.user_email_address}}">
 					<span class="focus-input100"></span>
 				</div>
 
@@ -72,16 +51,23 @@
 					<span class="focus-input100"></span>
 				</div>
 
-				<label class="label-input100" for="message">Message *</label>
-				<div class="wrap-input100 validate-input">
-					<textarea id="message" class="input100" name="message" placeholder="Please enter your comments..."></textarea>
+				<label class="label-input100" for="birth_date"> birth_date:</label>
+				<div class="wrap-input100">
+					<input id="birth_date" class="input100" type="text" name="country" placeholder="Eg. +1 800 000000">
+					<span class="focus-input100"></span>
+				</div>
+
+
+				<label class="label-input100" for="country"> Country</label>
+				<div class="wrap-input100">
+					<input id="country" class="input100" type="text" name="country" placeholder="Eg. +1 800 000000">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
 						<span>
-							Submit
+							Change
 							<i class="zmdi zmdi-arrow-right m-l-8"></i>
 						</span>
 					</button>

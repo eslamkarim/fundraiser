@@ -20,4 +20,4 @@ def user_edit(request):
         user = User.objects.get(user_id=1)
         dic = {"p_data": project,
                  "data": user}
-        return render(request, "e_profile/user_profile.html", dic)
+        return render(request, "edit_profile/edit_profile.html", dic)
