@@ -1,7 +1,7 @@
 import random
 import smtplib
 import re
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import ensure_csrf_cookie
 from .models import User
 
@@ -212,8 +212,8 @@ def code_validation(request):
                 else:
                     return render(request, 'user/invalid_code.html')
             except:
-                return render(request, 'user/home.html')
-    return render(request, 'user/code_validation.html')
+                return redirect("/") 
+    return redirect("/") 
 
 
 def is_email_exist(email):
