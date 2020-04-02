@@ -59,7 +59,7 @@
               </div>
           <div class="col-1 text-lg-left">
             {%if owner %}
-                <form enctype="multipart/form-data" action="{% url 'report' project.id %}" method="post" > 
+                <form enctype="multipart/form-data" action="{% url 'cancel_project' project.id %}" method="post" > 
                   {% csrf_token %}
                     <input type="submit" value="Cancel" class="btn btn-danger">
                 </form>
