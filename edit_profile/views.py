@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from project.models import Project_data, Category, project_tags,  Project_pics
-from user_profile.models import User
+from user.models import User
 
 
 # Create your views here.
