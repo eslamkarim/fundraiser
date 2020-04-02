@@ -1,4 +1,5 @@
 {% extends "nav.html" %}
+{% block userName %} {{ user.user_first_name }} {{ user.user_last_name }}{% endblock %}
 
 {% block css_link_block %}
 
@@ -60,7 +61,7 @@
                               <div class="py-4">
                                 <div class="d-flex align-items-center">
                                   <img src="{{ STATIC_URL }} /static/home/images/person_1.jpg" alt="Image" class="rounded-circle mr-3" width="50">
-                                  <div class="">James Smith</div>
+                                  <div class="">{{ project.user.user_first_name }} {{ project.user.user_last_name }}</div>
                                 </div>
                               </div>
                             </div>
