@@ -5,7 +5,7 @@ from django.contrib import messages
 from itertools import chain
 
 from .forms import ContactForm
-from .models import Project_data, Category, project_tags,  Project_pics, project_comments, Report_project, Donate_project, Rate_project, project_comment_replies
+from .models import Project_data, Category, project_tags,  Project_pics, project_comments, Report_project, Donate_project, Rate_project, project_comment_replies, Report_comment
 from user.models import User
 # Create your views here.
 
@@ -192,3 +192,20 @@ def reply(request, project_id, comment_id):
 	        return redirect(f"/project/{project_id}")
     else:
         return redirect(f"/project/{project_id}")
+
+		
+def report_comment(request,project_id,comment_id):
+      if request.method == 'POST':
+            if len(list(Report_comment.objects.filter(user_id= request.session['logged_in_user'],comment_id= comment_id))):
+                  messages.error(request, 'Your cant report same comment more than one', extra_tags='report_comment')
+                  return redirect(f"/project/{project_id}")
+            else:
+                  comment = project_comments.objects.get(id=comment_id)
+                  Report_comment.objects.create(
+                        comment = comment,
+                        user = User.objects.get(user_id= request.session['logged_in_user'])
+                  )
+                  messages.success(request, 'Your report done successfully!', extra_tags='report_comment')
+                  return redirect(f"/project/{project_id}")
+      else:
+            return redirect(f"/project/{project_id}")

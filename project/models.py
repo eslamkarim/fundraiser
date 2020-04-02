@@ -68,3 +68,7 @@ class Donate_project(models.Model):
   user = models.ForeignKey('user.User', related_name='donate_user',on_delete=models.CASCADE)
   project = models.ForeignKey('Project_data', related_name='donated_project',on_delete=models.CASCADE)
   value = models.IntegerField()
+
+class Report_comment(models.Model):
+  user = models.ForeignKey('user.User', related_name='report_comment_user',on_delete=models.CASCADE)
+  comment = models.ForeignKey('project_comments', related_name='comment_id',on_delete=models.CASCADE)
