@@ -216,7 +216,7 @@
                     <img src="https://www.uiuxstream.com/images/user-icon.jpg" class="img-fluid">
                   </span>
                   <span class="commenter-name">
-                    <a href="#">Happy uiuxStream</a> <span class="comment-time">2 hours ago</span>
+                    <a href="#">{{comment.comment_user.user_first_name}} {{comment.comment_user.user_last_name}}</a> <span class="comment-time">2 hours ago</span>
                   </span>       
                   <p class="comment-txt more text-center">{{comment.comment}}</p>
                   <div class="comment-meta">
@@ -235,7 +235,7 @@
                       <img src="https://www.uiuxstream.com/images/user-icon.jpg" class="img-fluid">
                     </span>
                     <span class="commenter-name">
-                      <a href="#">Happy uiuxStream</a> <span class="comment-time">2 hours ago</span>
+                      <a href="#">{{reply.reply_user.user_first_name}} {{reply.reply_user.user_last_name}}</a> <span class="comment-time">2 hours ago</span>
                     </span>       
                     <p class="comment-txt more text-center">{{reply.reply}}</p>
                   </div>

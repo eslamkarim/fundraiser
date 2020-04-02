@@ -11,8 +11,8 @@ from .models import Project_data, Category, project_tags,  Project_pics, project
 
 
 def create(request):
-    #del request.session['logged_in_user']
-    #print(request.session['logged_in_user'])
+    # del request.session['logged_in_user']
+    # print(request.session['logged_in_user'])
     if request.method == 'POST':
         filled_form = ContactForm(request.POST, request.FILES)
         if filled_form.is_valid():
@@ -110,16 +110,20 @@ def donate(request, project_id):
 
 def comment(request, project_id):
     if request.method == 'POST':
-        project = Project_data.objects.get(id=project_id)
-        comment = request.POST.get('comment')
-        if len(comment) > 0:
-            project_comments.objects.create(
-                project=project,
-                comment=comment
-            )
-            return redirect(f"/project/{project_id}")
-        else:
-            return redirect(f"/project/{project_id}")
+        try:
+	        project = Project_data.objects.get(id=project_id)
+	        comment = request.POST.get('comment')
+	        if len(comment) > 0:
+		        project_comments.objects.create(
+			        project=project,
+			        comment=comment,
+			        comment_user_id=request.session['logged_in_user']
+		        )
+		        return redirect(f"/project/{project_id}")
+	        else:
+		        return redirect(f"/project/{project_id}")
+        except:
+	        return redirect(f"/project/{project_id}")
     else:
         return redirect(f"/project/{project_id}")
 
