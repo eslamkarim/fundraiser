@@ -14,10 +14,11 @@ from user_profile.models import User
     #     form=UserChangeForm(instance=request.user)
     #     args={'form':form}
     #     return render(request,'edit_profile/edit_profile.html',args)
-def user_edit(request):
+def user_view(request):
         project = Project_data.objects.all()
         # user = User.objects.all()[:1].get()
         user = User.objects.get(user_id=1)
         dic = {"p_data": project,
                  "data": user}
         return render(request, "edit_profile/edit_profile.html", dic)
+

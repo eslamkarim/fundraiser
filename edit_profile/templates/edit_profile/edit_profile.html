@@ -24,7 +24,7 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form" >
+			<form class="contact100-form validate-form" action="views.user_edit" method="post" >
 				<span class="contact100-form-title">
 					Edit your data
 				</span>
@@ -47,20 +47,20 @@
 
 				<label class="label-input100" for="phone">Phone Number</label>
 				<div class="wrap-input100">
-					<input id="phone" class="input100" type="text" name="phone" placeholder="Eg. +1 800 000000">
+					<input id="phone" class="input100" type="text" name="phone" placeholder="Eg. +1 800 000000" value="{{data.phone}}">
 					<span class="focus-input100"></span>
 				</div>
 
 				<label class="label-input100" for="birth_date"> birth_date:</label>
 				<div class="wrap-input100">
-					<input id="birth_date" class="input100" type="text" name="country" placeholder="Eg. +1 800 000000">
+					<input id="birth_date" class="input100" type="text" name="country" placeholder="dd/m/yy" value="{{data.birth_date}}">
 					<span class="focus-input100"></span>
 				</div>
 
 
 				<label class="label-input100" for="country"> Country</label>
 				<div class="wrap-input100">
-					<input id="country" class="input100" type="text" name="country" placeholder="Eg. +1 800 000000">
+					<input id="country" class="input100" type="text" name="country" placeholder="Egypt" value="{{data.country}}">
 					<span class="focus-input100"></span>
 				</div>
 
