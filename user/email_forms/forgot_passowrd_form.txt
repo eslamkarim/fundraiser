@@ -1,0 +1,11 @@
+Hello user_name,
+
+Thanks for your request to change your password with your Fundraiser account!
+
+Please use the following link to change your password and confirm your ID.
+
+Your ID: id_here
+The link: link_here
+
+Thanks and Best Regards,
+Fundraiser Team
