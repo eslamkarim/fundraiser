@@ -1,0 +1,11 @@
+Hello user_name,
+
+Thanks for your sign up request with Fundraiser!
+
+This email is to confirm your that this is a valid email address.
+Please enter the following code with your first login to confirm your email address.
+
+The code is: code_here
+
+Thanks and Best Regards,
+Fundraiser Team

@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'project',
     'widget_tweaks',
     'mathfilters'
-    
+    'user',
 ]
 
 MIDDLEWARE = [
