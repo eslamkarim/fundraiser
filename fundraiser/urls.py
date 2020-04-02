@@ -23,9 +23,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("home.urls")),
-    path('profile/', include('user-profile.urls')),
+    path('profile/', include('user_profile.urls') ,name='profile'),
     path('project/', include('project.urls')),
-    path('profile/edit/', include('edit_profile.urls')),
+    path('profile/edit/', include('edit_profile.urls') ,name='edit'),
 ]
 
  

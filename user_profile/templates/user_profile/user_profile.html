@@ -1,0 +1,112 @@
+
+{% extends "nav.html" %}
+{% load static %}
+{% block head%}
+<title>profile</title>
+{% endblock%}
+{% block body_block %}
+<section class="section_gap">
+<div class="container">
+<h2 style="text-align:center">{{data.name}}</h2>
+
+<div class="card">
+    <br>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href= "{% static 'css/user_profile.css' %}" >
+<!--===============================================================================================-->
+</head>
+<body>
+
+
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form">
+				<span class="contact100-form-title">
+					Your Profile
+				</span>
+
+				<label class="label-input100">Your Name :</label>
+					<p class="input100">{{data.user_first_name }} {{data.user_last_name }}</p><br><br><br><br><br><br>
+
+
+
+				<label class="label-input100" >Email Address :</label>
+					<p class="input100">{{data.user_email_address}}</p>
+
+
+
+				<label class="label-input100">Phone Number:</label>
+					<p  class="input100">	{{data.phone}} </p>
+
+				<label class="label-input100" > country :</label>
+					<p class="input100"> {{data.country}}</p>
+
+				<label class="label-input100" > birth_date :</label>
+					<p class="input100"> {{data.birth_date}}</p>
+
+			</form>
+<!--		</div>-->
+<!--	</div>-->
+
+
+    <br>
+    <p>*************************************************************************</p>
+
+        <div class="site-section">
+      <div class="container">
+
+        <div class="row mb-5 align-items-st">
+          <div class="col-md-4">
+            <div class="heading-20219">
+              <span class="contact100-form-title"> Your Projects:</span>
+            </div>
+          </div>
+        </div>
+
+          {% for project in p_data %}
+        <div class="row">
+
+          <div class="col-md-4">
+              <div class="cause shadow-sm">
+
+                <a href="/project/{{ project.id }}" class="cause-link d-block">
+                  <img src="{{ context.featured_projects.0.cover.url }}" alt="Image" class="img-fluid">
+                  <div class="custom-progress-wrap">
+                    <span class="caption">{% widthratio project.current_money project.target 100 %}% complete</span>
+                    <div class="custom-progress-inner">
+                      <div class="custom-progress bg-danger" style="width:{% widthratio context.featured_projects.0.current_money context.featured_projects.0.target 100 %}%;"></div>
+                    </div>
+                  </div>
+                </a>
+
+                <div class="px-3 pt-3 border-top-0 border border shadow-sm">
+                  <span class="badge-danger py-1 small px-2 rounded mb-3 d-inline-block">{{ project.category }}</span>
+                  <h3 class="mb-4"><a href="/project/{{ context.featured_projects.0.id }}">{{ project.title }}</a></h3>
+                  <div class="border-top border-light border-bottom py-2 d-flex">
+                    <div>Donated</div>
+                    <div class="ml-auto"><strong class="text-primary">{{ project.current_money }} E.G</strong></div>
+                  </div>
+
+              </div>
+          </div>
+
+
+        </div>
+
+      </div>
+         {% endfor %}
+    </div>
+</div>
+</div></div>
+
+
+</div>
+</div>
+    </section>
+{% endblock %}
+

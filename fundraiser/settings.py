@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
-    'user-profile',
+    'user_profile',
     'project',
     'widget_tweaks',
     'mathfilters',
-    'edit_profile'
+    'edit_profile',
 
 ]
 
