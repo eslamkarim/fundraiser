@@ -196,6 +196,17 @@
           <div class="row">
             <div class="col-12">
               <div class="comments">
+                {%for message in messages %}
+                    {%if "comment" in message.tags %}
+                      <ul class="messages" style="list-style-type: none;">
+                        {% for message in messages %}
+                        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        </div>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {%endfor%}
                 <div class="comment-box add-comment">
                   <span class="commenter-pic">
                     <img src="https://www.uiuxstream.com/images/user-icon.jpg" class="img-fluid">
@@ -223,11 +234,14 @@
                     <button class="comment-reply reply-popup" onclick='$("#{{comment.id}}").toggle()'><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>  
                   </div>
                   <div id="{{comment.id}}" class="comment-box add-comment reply-box row" style="display: none;">
-                    <span class="commenter-name w-100">
-                      <input class="col-7" type="text" placeholder="Add a public reply" name="Add Comment">
-                      <button type="submit" class="btn btn-outline-primary col-1">Reply</button>
-                      <a class="float-right btn btn-default reply-popup col-1">Cancel</a>
-                    </span>
+                    <form enctype="multipart/form-data" action="{% url 'reply' project.id comment.id %}" method="post" > 
+                      {% csrf_token %}
+                      <span class="commenter-name w-100">
+                        <input class="col-7" type="text" placeholder="Add a public reply" name="reply">
+                        <button type="submit" class="btn btn-outline-primary col-1">Reply</button>
+                        <a class="float-right btn btn-default reply-popup col-1">Cancel</a>
+                      </span>
+                    </form>
                   </div>
                   {% for reply in comment.replies.all %}
                   <div class="comment-box replied">

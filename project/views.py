@@ -5,7 +5,7 @@ from django.contrib import messages
 from itertools import chain
 
 from .forms import ContactForm
-from .models import Project_data, Category, project_tags,  Project_pics, project_comments, Report_project, Donate_project, Rate_project
+from .models import Project_data, Category, project_tags,  Project_pics, project_comments, Report_project, Donate_project, Rate_project, project_comment_replies
 from user.models import User
 # Create your views here.
 
@@ -125,6 +125,7 @@ def comment(request, project_id):
 	        else:
 		        return redirect(f"/project/{project_id}")
         except:
+	        messages.error(request, 'Please login first!!!', extra_tags='comment')
 	        return redirect(f"/project/{project_id}")
     else:
         return redirect(f"/project/{project_id}")
@@ -170,3 +171,24 @@ def rate(request,project_id):
                         return redirect(f"/project/{project_id}")
       else:
             return redirect(f"/project/{project_id}")
+
+def reply(request, project_id, comment_id):
+    if request.method == 'POST':
+        try:
+	        project = Project_data.objects.get(id=project_id)
+	        comment = project_comments.objects.get(id=comment_id)
+	        reply = request.POST.get('reply')
+	        if len(reply) > 0:
+		        project_comment_replies.objects.create(
+			        reply=reply,
+			        comment=comment,
+			        reply_user_id=request.session['logged_in_user']
+		        )
+		        return redirect(f"/project/{project_id}")
+	        else:
+		        return redirect(f"/project/{project_id}")
+        except:
+	        messages.error(request, 'Please login first!!!', extra_tags='comment')
+	        return redirect(f"/project/{project_id}")
+    else:
+        return redirect(f"/project/{project_id}")
