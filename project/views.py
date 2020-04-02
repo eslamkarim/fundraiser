@@ -100,21 +100,25 @@ def error(request):
 
 def donate(request,project_id):
       if request.method == 'POST':
-            donating_value = int(request.POST.get('donation_value'))
-            project = Project_data.objects.get(id=project_id)
-            project.current_money += donating_value
-            if project.current_money <= project.target:
-                  project.save()
-                  Donate_project.objects.create(
-                        project = project,
-                        user = User.objects.get(user_id= request.session['logged_in_user']),
-                        value = donating_value
-                  )
-                  messages.success(request, 'Your Donation done successfully!', extra_tags='donate')
-                  return redirect(f"/project/{project_id}")
-            else:
-                  messages.error(request, 'Your Donation failed', extra_tags='donate')
-                  return redirect(f"/project/{project_id}")
+            try:
+                donating_value = int(request.POST.get('donation_value'))
+                project = Project_data.objects.get(id=project_id)
+                project.current_money += donating_value
+                if project.current_money <= project.target:
+                    project.save()
+                    Donate_project.objects.create(
+                            project = project,
+                            user = User.objects.get(user_id= request.session['logged_in_user']),
+                            value = donating_value
+                    )
+                    messages.success(request, 'Your Donation done successfully!', extra_tags='donate')
+                    return redirect(f"/project/{project_id}")
+                else:
+                    messages.error(request, 'Your Donation failed', extra_tags='donate')
+                    return redirect(f"/project/{project_id}")
+            except:
+                messages.error(request, 'Please login first!!!', extra_tags='donate')
+                return redirect(f"/project/{project_id}")
       else:
             return redirect(f"/project/{project_id}")
         
@@ -140,43 +144,51 @@ def comment(request, project_id):
             
 def report(request,project_id):
       if request.method == 'POST':
-            if len(list(Report_project.objects.filter(user_id= request.session['logged_in_user'],project_id= project_id))):
-                  messages.error(request, 'Your cant report more than one', extra_tags='report')
-                  return redirect(f"/project/{project_id}")
-            else:
-                  project = Project_data.objects.get(id=project_id)
-                  project.reports += 1 
-                  project.save()
-                  Report_project.objects.create(
-                        project = project,
-                        user = User.objects.get(user_id= request.session['logged_in_user'])
-                  )
-                  messages.success(request, 'Your report done successfully!', extra_tags='report')
-                  return redirect(f"/project/{project_id}")
+            try:
+                if len(list(Report_project.objects.filter(user_id= request.session['logged_in_user'],project_id= project_id))):
+                    messages.error(request, 'Your cant report more than one', extra_tags='report')
+                    return redirect(f"/project/{project_id}")
+                else:
+                    project = Project_data.objects.get(id=project_id)
+                    project.reports += 1 
+                    project.save()
+                    Report_project.objects.create(
+                            project = project,
+                            user = User.objects.get(user_id= request.session['logged_in_user'])
+                    )
+                    messages.success(request, 'Your report done successfully!', extra_tags='report')
+                    return redirect(f"/project/{project_id}")
+            except:
+                messages.error(request, 'Please login first!!!', extra_tags='report')
+                return redirect(f"/project/{project_id}")
       else:
             return redirect(f"/project/{project_id}")
       
 def rate(request,project_id):
       if request.method == 'POST':
-            if len(list(Rate_project.objects.filter(user_id= request.session['logged_in_user'],project_id= project_id))):
-                  messages.error(request, 'Your cant rate more than one', extra_tags='rate')
-                  return redirect(f"/project/{project_id}")
-            else:
-                  rating_value = int(request.POST.get('rating',-1))
-                  if rating_value > 0 and rating_value < 6:
-                        project = Project_data.objects.get(id=project_id)
-                        project.rating = (int(request.POST.get('rating'))+project.rating)/2
-                        project.save()
-                        messages.success(request, 'Your rating done successfully!', extra_tags='rate')
-                        Rate_project.objects.create(
-                              project = project,
-                              user = User.objects.get(user_id= request.session['logged_in_user']),
-                              value = rating_value
-                        )
-                        return redirect(f"/project/{project_id}")
-                  else:
-                        messages.error(request, 'Your rating failed', extra_tags='rate')
-                        return redirect(f"/project/{project_id}")
+            try:
+                if len(list(Rate_project.objects.filter(user_id= request.session['logged_in_user'],project_id= project_id))):
+                    messages.error(request, 'Your cant rate more than one', extra_tags='rate')
+                    return redirect(f"/project/{project_id}")
+                else:
+                    rating_value = int(request.POST.get('rating',-1))
+                    if rating_value > 0 and rating_value < 6:
+                            project = Project_data.objects.get(id=project_id)
+                            project.rating = (int(request.POST.get('rating'))+project.rating)/2
+                            project.save()
+                            messages.success(request, 'Your rating done successfully!', extra_tags='rate')
+                            Rate_project.objects.create(
+                                project = project,
+                                user = User.objects.get(user_id= request.session['logged_in_user']),
+                                value = rating_value
+                            )
+                            return redirect(f"/project/{project_id}")
+                    else:
+                            messages.error(request, 'Your rating failed', extra_tags='rate')
+                            return redirect(f"/project/{project_id}")
+            except:
+                messages.error(request, 'Please login first!!!', extra_tags='rate')
+                return redirect(f"/project/{project_id}")
       else:
             return redirect(f"/project/{project_id}")
 
@@ -204,28 +216,36 @@ def reply(request, project_id, comment_id):
 		
 def report_comment(request,project_id,comment_id):
       if request.method == 'POST':
-            if len(list(Report_comment.objects.filter(user_id= request.session['logged_in_user'],comment_id= comment_id))):
-                  messages.error(request, 'Your cant report same comment more than one', extra_tags='report_comment')
-                  return redirect(f"/project/{project_id}")
-            else:
-                  comment = project_comments.objects.get(id=comment_id)
-                  Report_comment.objects.create(
-                        comment = comment,
-                        user = User.objects.get(user_id= request.session['logged_in_user'])
-                  )
-                  messages.success(request, 'Your report done successfully!', extra_tags='report_comment')
-                  return redirect(f"/project/{project_id}")
+            try:
+                if len(list(Report_comment.objects.filter(user_id= request.session['logged_in_user'],comment_id= comment_id))):
+                    messages.error(request, 'Your cant report same comment more than one', extra_tags='report_comment')
+                    return redirect(f"/project/{project_id}")
+                else:
+                    comment = project_comments.objects.get(id=comment_id)
+                    Report_comment.objects.create(
+                            comment = comment,
+                            user = User.objects.get(user_id= request.session['logged_in_user'])
+                    )
+                    messages.success(request, 'Your report done successfully!', extra_tags='report_comment')
+                    return redirect(f"/project/{project_id}")
+            except:
+                messages.error(request, 'Please login first!!!', extra_tags='comment')
+                return redirect(f"/project/{project_id}")
       else:
             return redirect(f"/project/{project_id}")
         
 def cancel_project(request,project_id):
     if request.method == 'POST':
-        project = Project_data.objects.get(id=project_id)
-        if  float(project.current_money) / project.target >= 0.25:
-            messages.error(request, 'Your cant cancel project if the donations are less than 25% of the target ', extra_tags='report')
-            return redirect(f"/project/{project_id}")
-        else:    
-            project.delete()
-            return redirect("/")
+        try:
+            project = Project_data.objects.get(id=project_id)
+            if  float(project.current_money) / project.target >= 0.25:
+                messages.error(request, 'Your cant cancel project if the donations are less than 25% of the target ', extra_tags='report')
+                return redirect(f"/project/{project_id}")
+            else:    
+                project.delete()
+                return redirect("/")
+        except:
+	        messages.error(request, 'Please login first!!!', extra_tags='report')
+	        return redirect(f"/project/{project_id}")
     else:
         return redirect(f"/project/{project_id}")
