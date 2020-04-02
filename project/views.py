@@ -217,3 +217,15 @@ def report_comment(request,project_id,comment_id):
                   return redirect(f"/project/{project_id}")
       else:
             return redirect(f"/project/{project_id}")
+        
+def cancel_project(request,project_id):
+    if request.method == 'POST':
+        project = Project_data.objects.get(id=project_id)
+        if  float(project.current_money) / project.target >= 0.25:
+            messages.error(request, 'Your cant cancel project if the donations are less than 25% of the target ', extra_tags='report')
+            return redirect(f"/project/{project_id}")
+        else:    
+            project.delete()
+            return redirect("/")
+    else:
+        return redirect(f"/project/{project_id}")
