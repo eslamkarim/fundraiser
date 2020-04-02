@@ -26,7 +26,7 @@ class Category(models.Model):
   
   
 class Project_pics(models.Model):
-  project = models.ForeignKey('Project_data',on_delete=models.CASCADE)
+  project = models.ForeignKey('Project_data',related_name='images',on_delete=models.CASCADE)
   image = models.ImageField(upload_to='project_images')
   
   def __str__(self):
@@ -40,7 +40,7 @@ class project_comments(models.Model):
     return self.comment
 
 class project_tags(models.Model):
-  project = models.ForeignKey('Project_data',on_delete=models.CASCADE)
+  project = models.ForeignKey('Project_data',related_name='tags',on_delete=models.CASCADE)
   tag = models.CharField(max_length=50)  
   
   def __str__(self):
@@ -48,6 +48,7 @@ class project_tags(models.Model):
 
 class project_comment_replies(models.Model):
       comment = models.ForeignKey('Project_comments',related_name='replies',on_delete=models.CASCADE)
+      user = models.ForeignKey('',related_name='user',on_delete=models.CASCADE)
       reply = models.TextField()
 
 
