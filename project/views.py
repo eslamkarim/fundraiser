@@ -5,8 +5,8 @@ from django.contrib import messages
 from itertools import chain
 
 from .forms import ContactForm
-from .models import Project_data, Category, project_tags,  Project_pics, project_comments
-
+from .models import Project_data, Category, project_tags,  Project_pics, project_comments, Report_project, Donate_project, Rate_project
+from user.models import User
 # Create your views here.
 
 
@@ -90,24 +90,26 @@ def project(request, project_id):
 def error(request):
     return render(request, "project/error.html")
 
-
-def donate(request, project_id):
-    if request.method == 'POST':
-        project = Project_data.objects.get(id=project_id)
-        project.current_money += int(request.POST.get('donation_value'))
-        if project.current_money <= project.target:
-            project.save()
-            messages.success(
-                request, 'Your Donation done successfully!', extra_tags='donate')
+def donate(request,project_id):
+      if request.method == 'POST':
+            donating_value = int(request.POST.get('donation_value'))
+            project = Project_data.objects.get(id=project_id)
+            project.current_money += donating_value
+            if project.current_money <= project.target:
+                  project.save()
+                  Donate_project.objects.create(
+                        project = project,
+                        user = User.objects.get(user_id= request.session['logged_in_user']),
+                        value = donating_value
+                  )
+                  messages.success(request, 'Your Donation done successfully!', extra_tags='donate')
+                  return redirect(f"/project/{project_id}")
+            else:
+                  messages.error(request, 'Your Donation failed', extra_tags='donate')
+                  return redirect(f"/project/{project_id}")
+      else:
             return redirect(f"/project/{project_id}")
-        else:
-            messages.error(request, 'Your Donation failed',
-                           extra_tags='donate')
-            return redirect(f"/project/{project_id}")
-    else:
-        return redirect(f"/project/{project_id}")
-
-
+        
 def comment(request, project_id):
     if request.method == 'POST':
         try:
@@ -126,31 +128,45 @@ def comment(request, project_id):
 	        return redirect(f"/project/{project_id}")
     else:
         return redirect(f"/project/{project_id}")
-
-
-def report(request, project_id):
-    if request.method == 'POST':
-        project = Project_data.objects.get(id=project_id)
-        project.reports += 1
-        project.save()
-        messages.success(
-            request, 'Your report done successfully!', extra_tags='report')
-        return redirect(f"/project/{project_id}")
-    else:
-        return redirect(f"/project/{project_id}")
-
-
-def rate(request, project_id):
-    if request.method == 'POST':
-        if int(request.POST.get('rating', -1)) > 0 and int(request.POST.get('rating', -1)) < 6:
-            project = Project_data.objects.get(id=project_id)
-            project.rating = (int(request.POST.get('rating'))+project.rating)/2
-            project.save()
-            messages.success(
-                request, 'Your rating done successfully!', extra_tags='rate')
+            
+def report(request,project_id):
+      if request.method == 'POST':
+            if len(list(Report_project.objects.filter(user_id= request.session['logged_in_user'],project_id= project_id))):
+                  messages.error(request, 'Your cant report more than one', extra_tags='report')
+                  return redirect(f"/project/{project_id}")
+            else:
+                  project = Project_data.objects.get(id=project_id)
+                  project.reports += 1 
+                  project.save()
+                  Report_project.objects.create(
+                        project = project,
+                        user = User.objects.get(user_id= request.session['logged_in_user'])
+                  )
+                  messages.success(request, 'Your report done successfully!', extra_tags='report')
+                  return redirect(f"/project/{project_id}")
+      else:
             return redirect(f"/project/{project_id}")
-        else:
-            messages.error(request, 'Your rating failed', extra_tags='rate')
+      
+def rate(request,project_id):
+      if request.method == 'POST':
+            if len(list(Rate_project.objects.filter(user_id= request.session['logged_in_user'],project_id= project_id))):
+                  messages.error(request, 'Your cant rate more than one', extra_tags='rate')
+                  return redirect(f"/project/{project_id}")
+            else:
+                  rating_value = int(request.POST.get('rating',-1))
+                  if rating_value > 0 and rating_value < 6:
+                        project = Project_data.objects.get(id=project_id)
+                        project.rating = (int(request.POST.get('rating'))+project.rating)/2
+                        project.save()
+                        messages.success(request, 'Your rating done successfully!', extra_tags='rate')
+                        Rate_project.objects.create(
+                              project = project,
+                              user = User.objects.get(user_id= request.session['logged_in_user']),
+                              value = rating_value
+                        )
+                        return redirect(f"/project/{project_id}")
+                  else:
+                        messages.error(request, 'Your rating failed', extra_tags='rate')
+                        return redirect(f"/project/{project_id}")
+      else:
             return redirect(f"/project/{project_id}")
-    else:
-        return redirect(f"/project/{project_id}")
