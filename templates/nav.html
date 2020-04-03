@@ -61,21 +61,21 @@
 										<a class="nav-link" href="contact">Contact us</a>
 									</li>
 
-                                    {% if user %}
+                                    {% if loggedin_user %}
                                         <li class="nav-item submenu dropdown">
-                                            <i class="fa fa-user"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">  {{ user.user_first_name }}{{ user.user_last_name }}</a> </i>
+                                            <i class="fa fa-user"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ loggedin_user.user_first_name }} {{ loggedin_user.user_last_name }}</a> </i>
                                             <ul class="dropdown-menu">
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="{% url 'profile' %}">Profile</a>
                                                 </li>
-                                                <li class="nav-item">
+												 <li class="nav-item">
+                                                    <a class="nav-link" href="{% url 'edit' %}">Edit profile</a>
+												</li>
+												<li class="nav-item">
                                                     <a class="nav-link" href="{% url 'create' %}">Create Project</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="{% url 'sign_out' %}">Sign out</a>
-                                                </li>
-												 <li class="nav-item">
-                                                    <a class="nav-link" href="{% url 'edit' %}">Edit profile</a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -163,13 +163,6 @@
 	<script src="{{ STATIC_URL }} /static/vendors/nice-select/js/jquery.nice-select.min.js"></script>
 	<script src="{{ STATIC_URL }} /static/js/jquery.ajaxchimp.min.js"></script>
 	<script src="{{ STATIC_URL }} /static/js/custom.js"></script>
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> origin/user-profile
 	{% block js_link_block %}
 	{% endblock %}
 	{% block script_block %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from project.models import Project_data, Category, project_tags,  Project_pics
-from user.models import User
+from user.models import Profile
 import re
 from datetime import datetime
 
@@ -31,7 +31,7 @@ def check_empty(first_name):
 def user_view(request):
     if 'logged_in_user' in request.session:
         project = Project_data.objects.filter(user_id =request.session['logged_in_user'])
-        user = User.objects.get(user_id=request.session['logged_in_user'])
+        user = Profile.objects.get(user_id=request.session['logged_in_user'])
         dic = {"p_data": project,
                  "data": user}
         return render(request, "edit_profile/edit_profile.html", dic)
@@ -58,7 +58,7 @@ def user_edit(request):
             country= request.POST.get('country')
             if check_empty(country):
                 dict['user_country'] = country
-            User.objects.filter(user_id=user_id).update(**dict)
+            Profile.objects.filter(user_id=user_id).update(**dict)
 
 
             return redirect (f"/profile/")

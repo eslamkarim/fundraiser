@@ -1,9 +1,10 @@
-import random, string
+import random
+import string
 import smtplib
 import re
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import ensure_csrf_cookie
-from .models import User
+from .models import Profile
 
 
 def home(request):
@@ -14,10 +15,12 @@ def generate_sign_up_code():
     sign_up_code = random.getrandbits(32)
     return sign_up_code
 
+
 def randomStringDigits(stringLength=11):
     """Generate a random string of letters and digits """
     lettersAndDigits = string.ascii_letters + string.digits
     return ''.join(random.choice(lettersAndDigits) for i in range(stringLength))
+
 
 def send_sign_up_validation_email(user_name, user_email_address):
     # vars to declare sending the email
@@ -28,8 +31,8 @@ def send_sign_up_validation_email(user_name, user_email_address):
     server.login(sender_email_address, sender_email_password)
     try:
         # getting the user key.
-        user_sign_up_code = generate_sign_up_code()
-       # user_sign_up_code = randomStringDigits()
+        #user_sign_up_code = generate_sign_up_code()
+        user_sign_up_code = randomStringDigits()
         # Putting the user name and user code in the validation email to the user.
         reading_file = open("user/email_forms/email_validation_form.txt", "r")
         new_file_content = ""
@@ -39,13 +42,15 @@ def send_sign_up_validation_email(user_name, user_email_address):
                 new_line = stripped_line.replace("user_name", "%s" % user_name)
                 new_file_content += new_line + "\n"
             elif re.search('code_here$', stripped_line):
-                new_line = stripped_line.replace("code_here", "%s" % user_sign_up_code)
+                new_line = stripped_line.replace(
+                    "code_here", "%s" % user_sign_up_code)
                 new_file_content += new_line + "\n"
             else:
                 new_file_content += stripped_line + "\n"
         reading_file.close()
         # closing the final email message after processing
-        final_email_body = open("user/email_forms/final_email_validation.txt", "w")
+        final_email_body = open(
+            "user/email_forms/final_email_validation.txt", "w")
         final_email_body.write(new_file_content)
         final_email_body.close()
 
@@ -84,14 +89,16 @@ def send_forgot_password_email(user_name, user_email_address, user_id):
                 new_line = stripped_line.replace("id_here", f"{user_id}")
                 new_file_content += new_line + "\n"
             elif re.search('link_here$', stripped_line):
-                new_line = stripped_line.replace("link_here", f"http://localhost:8000/updatepassowrd")
+                new_line = stripped_line.replace(
+                    "link_here", f"http://localhost:8000/updatepassowrd")
                 new_file_content += new_line + "\n"
             else:
                 new_file_content += stripped_line + "\n"
         reading_file.close()
 
         # closing the final email message after processing
-        final_email_body = open("user/email_forms/final_forgot_password.txt", "w")
+        final_email_body = open(
+            "user/email_forms/final_forgot_password.txt", "w")
         final_email_body.write(new_file_content)
         final_email_body.close()
 
@@ -113,15 +120,16 @@ def send_forgot_password_email(user_name, user_email_address, user_id):
 
 def check_password(password, conf_password):
     if password == '' or conf_password == '':
-        return False;
+        return False
     if password != conf_password:
-        return False;
+        return False
     if password == conf_password:
-        return True;
+        return True
 
 
 def check_email(email_address):
-    matcher = re.search('^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$', email_address)
+    matcher = re.search(
+        '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$', email_address)
     if matcher:
         return True
     return False
@@ -147,7 +155,7 @@ def sign_up(request):
         last_name = request.POST.get("last_name")
         phone_number = request.POST.get("phone_number")
         email_address = request.POST.get("email")
-        birthday=request.POST.get("birthday")
+        birthday = request.POST.get("birthday")
         password = request.POST.get("password")
         conf_password = request.POST.get("conf_password")
 
@@ -164,15 +172,16 @@ def sign_up(request):
                 'conf_password': conf_password
             }
 
-            validation_code = send_sign_up_validation_email(user_full_name, email_address)
+            validation_code = send_sign_up_validation_email(
+                user_full_name, email_address)
             if validation_code:
-                user_instance = User(user_first_name=first_name,
-                                     user_last_name=last_name,
-                                     user_email_address=email_address,
-                                     user_password=password,
-                                     user_birthDate=birthday,
-                                     user_phone_number=phone_number,
-                                     verification_code= validation_code)
+                user_instance = Profile(user_first_name=first_name,
+                                        user_last_name=last_name,
+                                        user_email_address=email_address,
+                                        user_password=password,
+                                        user_birthDate=birthday,
+                                        user_phone_number=phone_number,
+                                        verification_code=validation_code)
                 user_instance.save()
                 return render(request, 'user/code_validation.html')
             else:
@@ -189,7 +198,8 @@ def sign_in(request):
             email = request.POST.get('email')
             password = request.POST.get('pass')
             try:
-                logged_user = User.objects.get(user_email_address=email, user_password=password)
+                logged_user = Profile.objects.get(
+                    user_email_address=email, user_password=password)
                 if logged_user.is_verified_user:
                     request.session['logged_in_user'] = logged_user.user_id
                     return redirect('home')
@@ -217,25 +227,27 @@ def code_validation(request):
 
             try:
 
-                is_code_exist = User.objects.get(verification_code=int(user_code))
+                is_code_exist = Profile.objects.get(
+                    verification_code=int(user_code))
                 print(is_code_exist)
                 if is_code_exist:
 
-                    User.objects.filter(verification_code=user_code, is_verified_user=False).update(is_verified_user=True)
+                    Profile.objects.filter(verification_code=user_code, is_verified_user=False).update(
+                        is_verified_user=True)
 
                     return render(request, 'user/valid_code.html')
                 else:
                     return render(request, 'user/invalid_code.html')
             except:
 
-                return redirect("/") 
-    return redirect("/") 
+                return redirect("/")
+    return redirect("/")
 
 
 def is_email_exist(email):
     if email:
         try:
-            is_exist = User.objects.get(user_email_address=email)
+            is_exist = Profile.objects.get(user_email_address=email)
             if is_exist:
                 return is_exist
         except:
@@ -252,7 +264,8 @@ def forgot_password_form(request):
             if is_exist:
                 user_full_name = is_exist.user_first_name + " " + is_exist.user_last_name
                 user_id = is_exist.user_id
-                sent_forgot_password_email = send_forgot_password_email(user_full_name, forgot_password_email, user_id)
+                sent_forgot_password_email = send_forgot_password_email(
+                    user_full_name, forgot_password_email, user_id)
                 if sent_forgot_password_email:
                     return render(request, 'user/forgot_password_message.html')
                 return render(request, 'user/invalid_email.html')
@@ -260,7 +273,6 @@ def forgot_password_form(request):
     return render(request, 'user/invalid_email.html')
 
 
-# User.objects.filter(verification_code=user_code, is_verified_user=False).update(is_verified_user=True)
 @ensure_csrf_cookie
 def update_password(request):
     if request.method == "POST":
@@ -272,7 +284,8 @@ def update_password(request):
             is_valid_password = check_password(password, conf_password)
             if is_valid_password:
                 try:
-                    User.objects.filter(user_id=user_id).update(user_password=password)
+                    Profile.objects.filter(user_id=user_id).update(
+                        user_password=password)
                     return render(request, 'user/updated_password_confirmation.html')
                 except:
                     return render(request, 'user/error_updating_password.html')
