@@ -3,6 +3,7 @@ from django.http.response import HttpResponse
 from django import forms
 from django.contrib import messages
 from itertools import chain
+import datetime
 
 from .forms import ContactForm
 from .models import Project_data, Category, project_tags, Project_pics, project_comments, Report_project, \
@@ -91,12 +92,18 @@ def project(request, project_id):
                 project_owner = False
         else:
             project_owner = False
+            
+        is_ended = True if project.end_date < datetime.date.today() else False
+        
+        is_completed = True if project.current_money >= project.target else False
         context = {
             "images": pics,
             "project": project,
             "comments": comments,
             "related_projects_list": related_projects_data,
-            "owner": project_owner
+            "owner": project_owner,
+            "is_ended" : is_ended,
+            "is_completed": is_completed
         }
 
     except Project_data.DoesNotExist:
@@ -234,7 +241,7 @@ def report_comment(request, project_id, comment_id):
         try:
             if len(list(
                     Report_comment.objects.filter(user_id=request.session['logged_in_user'], comment_id=comment_id))):
-                messages.error(request, 'Your cant report same comment more than one', extra_tags='report_comment')
+                messages.error(request, 'Your cant report same comment more than one', extra_tags='comment')
                 return redirect(f"/project/{project_id}")
             else:
                 comment = project_comments.objects.get(id=comment_id)
@@ -242,7 +249,7 @@ def report_comment(request, project_id, comment_id):
                     comment=comment,
                     user=User.objects.get(user_id=request.session['logged_in_user'])
                 )
-                messages.success(request, 'Your report done successfully!', extra_tags='report_comment')
+                messages.success(request, 'Your report done successfully!', extra_tags='comment')
                 return redirect(f"/project/{project_id}")
         except:
             messages.error(request, 'Please login first!!!', extra_tags='comment')

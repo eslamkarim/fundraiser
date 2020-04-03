@@ -105,7 +105,7 @@
                   <!-- END -->
                 </div>
               </div>
-            {% if user %}
+            {% if not owner  and not is_ended and not is_completed %}
                 <div class="card justify-content-center w-100 bg-white rounded-lg p-5 shadow">
                     <div>
                       {%for message in messages %}
@@ -154,16 +154,17 @@
       <div class="card bg-white rounded-lg p-5 shadow">
         {%for message in messages %}
         {%if "rate" in message.tags %}
-          <ul class="messages" style="list-style-type: none;">
-            {% for message in messages %}
-            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
-                <li class="{{ message.tags }}">{{ message }}</li>
-            </div>
-            {% endfor %}
+        <ul class="messages" style="list-style-type: none;">
+          {% for message in messages %}
+          <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+            <li class="{{ message.tags }}">{{ message }}</li>
+          </div>
+          {% endfor %}
         </ul>
         {% endif %}
         {%endfor%}
         <div class="card-body">
+          {% if not owner  and not is_ended and not is_cis_completed %}
           <div class="row">  
             <h2 class="col-3">Your Rate: </h2>
             <div class="col-6">  
@@ -183,6 +184,7 @@
               </div>
             </form>
           </div>
+          {% endif %}
           <div class="row" style="border-bottom: solid lightgrey ;">
           </div>
           <div class="row">  
