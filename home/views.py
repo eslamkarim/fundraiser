@@ -2,7 +2,7 @@ from django.shortcuts import render
 from random import shuffle
 from project.models import Project_data, Category, project_tags,  Project_pics
 from django.db.models import Q
-from user.models import User
+from user.models import Profile
 
 # Create your views here.
 
@@ -45,5 +45,5 @@ def search(request):
 
 
 def contact(request):
-    user = User.objects.get(user_id=request.session['logged_in_user'])
+    user = Profile.objects.get(user_id=request.session['logged_in_user'])
     return render(request, 'home/contact.html')

@@ -8,17 +8,17 @@ import datetime
 from .forms import ContactForm
 from .models import Project_data, Category, project_tags, Project_pics, project_comments, Report_project, \
     Donate_project, Rate_project, project_comment_replies, Report_comment
-from user.models import User
+from user.models import Profile
 
 
 # Create your views here.
 
 def returnCurrentUser(request):
     if 'logged_in_user' in request.session:
-        user = User.objects.get(user_id=request.session['logged_in_user'])
-        return {"user": user}
+        user = Profile.objects.get(user_id=request.session['logged_in_user'])
+        return {"loggedin_user": user}
     else:
-        return {"user": False}
+        return {"loggedin_user": False}
 
 
 def create(request):
@@ -125,7 +125,7 @@ def donate(request, project_id):
                 project.save()
                 Donate_project.objects.create(
                     project=project,
-                    user=User.objects.get(user_id=request.session['logged_in_user']),
+                    user=Profile.objects.get(user_id=request.session['logged_in_user']),
                     value=donating_value
                 )
                 messages.success(request, 'Your Donation done successfully!', extra_tags='donate')
@@ -174,7 +174,7 @@ def report(request, project_id):
                 project.save()
                 Report_project.objects.create(
                     project=project,
-                    user=User.objects.get(user_id=request.session['logged_in_user'])
+                    user=Profile.objects.get(user_id=request.session['logged_in_user'])
                 )
                 messages.success(request, 'Your report done successfully!', extra_tags='report')
                 return redirect(f"/project/{project_id}")
@@ -200,7 +200,7 @@ def rate(request, project_id):
                     messages.success(request, 'Your rating done successfully!', extra_tags='rate')
                     Rate_project.objects.create(
                         project=project,
-                        user=User.objects.get(user_id=request.session['logged_in_user']),
+                        user=Profile.objects.get(user_id=request.session['logged_in_user']),
                         value=rating_value
                     )
                     return redirect(f"/project/{project_id}")
@@ -247,7 +247,7 @@ def report_comment(request, project_id, comment_id):
                 comment = project_comments.objects.get(id=comment_id)
                 Report_comment.objects.create(
                     comment=comment,
-                    user=User.objects.get(user_id=request.session['logged_in_user'])
+                    user=Profile.objects.get(user_id=request.session['logged_in_user'])
                 )
                 messages.success(request, 'Your report done successfully!', extra_tags='comment')
                 return redirect(f"/project/{project_id}")

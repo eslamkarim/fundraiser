@@ -26,6 +26,8 @@ urlpatterns = [
     path('home', include("home.urls")),
     path('project/', include('project.urls')),
     path('user/', include("user.urls")),
+    path('profile/', include('user_profile.urls') ),
+    path('profile/edit/', include('edit_profile.urls') ),
 ]
 
  

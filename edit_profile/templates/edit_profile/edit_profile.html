@@ -1,0 +1,87 @@
+{% extends "nav.html" %}
+{% load static %}
+{% block css_link_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/user_profile.css' %}">
+{% endblock %}
+
+{% block body_block %}
+
+<section class="section_gap">
+
+
+        <div class="container-contact100">
+
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" action="{% url 'user_edit' %}" method="POST" >
+				{% csrf_token %}
+				<span class="contact100-form-title">
+					Edit your data
+				</span>
+
+				<label class="label-input100" for="first-name">Your Name *</label>
+				<div class="wrap-input100 rs1 validate-input">
+					<input id="first_name" class="input100" type="text" name="first_name" placeholder="First name" value= "{{data.user_first_name }}">
+					<span class="focus-input100"></span>
+				</div>
+				<div class="wrap-input100 rs1 validate-input">
+					<input id="last-name" class="input100" type="text" name="last_name" placeholder="Last name" value="{{data.user_last_name }}">
+					<span class="focus-input100"></span>
+				</div>
+
+				<label class="label-input100" for="email">Email Address *</label>
+				<div class="wrap-input100 validate-input">
+<!--					<input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com" value="{{data.user_email_address}}">-->
+					     <p class="input100">{{data.user_email_address}}</p>
+					<span class="focus-input100"></span>
+				</div>
+
+				<label class="label-input100" for="phone">Phone Number</label>
+				<div class="wrap-input100">
+					<input id="phone" class="input100" type="text" name="phone_number" placeholder="Eg. +1 800 000000" value="{{data.user_phone_number}}">
+					<span class="focus-input100"></span>
+				</div>
+
+				<label class="label-input100" for="birth_date"> birth_date:</label>
+				<div class="wrap-input100">
+					<input id="birth_date" class="input100" type="date" name="birth_date"  value="{{data.user_birthDate}}">
+					<span class="focus-input100"></span>
+				</div>
+
+
+				<label class="label-input100" for="country"> Country</label>
+				<div class="wrap-input100">
+					<input id="country" class="input100" type="text" name="country" placeholder="Egypt" value="{{data.user_country}}">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn">
+						<span>
+							Change
+							<i class="zmdi zmdi-arrow-right m-l-8"></i>
+						</span>
+					</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+</section>
+
+{% endblock %}
+
+
+
+
+
