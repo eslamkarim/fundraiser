@@ -31,8 +31,7 @@ from . import views
 				</span>
 
 				<label class="label-input100">Your Name :</label>
-					<p class="input100">{{data.user_first_name }} {{data.user_last_name }}</p><br><br><br><br><br><br>
-
+					<p class="input100">{{data.user_first_name }} {{data.user_last_name }}</p>
 
 
 				<label class="label-input100" >Email Address :</label>
@@ -41,13 +40,13 @@ from . import views
 
 
 				<label class="label-input100">Phone Number:</label>
-					<p  class="input100">	{{data.phone}} </p>
+					<p  class="input100" type="text">{{data.user_phone_number}} </p>
 
 				<label class="label-input100" > country :</label>
-					<p class="input100"> {{data.country}}</p>
+					<p class="input100"> {{data.user_country}}</p>
 
 				<label class="label-input100" > birth_date :</label>
-					<p class="input100"> {{data.birth_date}}</p>
+					<p class="input100"> {{data.user_birthDate}}</p>
 
 			</form>
 <!--		</div>-->
@@ -104,7 +103,8 @@ from . import views
 </div>
 </div></div>
 
-
+  </body>
+</html>
 </div>
 </div>
     </section>

@@ -7,7 +7,11 @@ class User(models.Model):
     user_first_name = models.CharField(max_length=100)
     user_last_name = models.CharField(max_length=100)
     user_email_address = models.EmailField()
+    user_phone_number=models.CharField(max_length=20)
+    user_birthDate=models.DateField(null=True)
+    user_country=models.CharField(max_length=50)
     user_password = models.CharField(max_length=250)
     sign_up_date = models.DateTimeField(auto_now_add=True, blank=True)
     verification_code = models.CharField(max_length=20)
     is_verified_user = models.BooleanField(default=False)
+    

@@ -28,8 +28,8 @@ def send_sign_up_validation_email(user_name, user_email_address):
     server.login(sender_email_address, sender_email_password)
     try:
         # getting the user key.
-        #user_sign_up_code = generate_sign_up_code()
-        user_sign_up_code = randomStringDigits()
+        user_sign_up_code = generate_sign_up_code()
+       # user_sign_up_code = randomStringDigits()
         # Putting the user name and user code in the validation email to the user.
         reading_file = open("user/email_forms/email_validation_form.txt", "r")
         new_file_content = ""
@@ -147,6 +147,7 @@ def sign_up(request):
         last_name = request.POST.get("last_name")
         phone_number = request.POST.get("phone_number")
         email_address = request.POST.get("email")
+        birthday=request.POST.get("birthday")
         password = request.POST.get("password")
         conf_password = request.POST.get("conf_password")
 
@@ -169,6 +170,8 @@ def sign_up(request):
                                      user_last_name=last_name,
                                      user_email_address=email_address,
                                      user_password=password,
+                                     user_birthDate=birthday,
+                                     user_phone_number=phone_number,
                                      verification_code= validation_code)
                 user_instance.save()
                 return render(request, 'user/code_validation.html')
@@ -207,16 +210,24 @@ def sign_out(request):
 
 def code_validation(request):
     if request.method == "POST":
+
         if request.POST.get('sign_up_code'):
+
             user_code = request.POST.get('sign_up_code')
+
             try:
-                is_code_exist = User.objects.get(verification_code=user_code)
+
+                is_code_exist = User.objects.get(verification_code=int(user_code))
+                print(is_code_exist)
                 if is_code_exist:
+
                     User.objects.filter(verification_code=user_code, is_verified_user=False).update(is_verified_user=True)
+
                     return render(request, 'user/valid_code.html')
                 else:
                     return render(request, 'user/invalid_code.html')
             except:
+
                 return redirect("/") 
     return redirect("/") 
 

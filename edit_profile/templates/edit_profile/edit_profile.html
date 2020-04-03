@@ -1,66 +1,56 @@
 {% extends "nav.html" %}
 {% load static %}
-{% block head%}
-<title>profile</title>
-{% endblock%}
+{% block css_link_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/user_profile.css' %}">
+{% endblock %}
+
 {% block body_block %}
+
 <section class="section_gap">
-<!--<div class="container">-->
-<!--<form method="post">-->
-
-<!--    {{ form.as_p}}-->
-<!--    <button type="submit">Submit</button>-->
-<!--</form>-->
-<!--</div>-->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href= "{% static 'css/edit_profile.css' %}" >
-<!--===============================================================================================-->
-</head>
-<body>
 
 
-	<div class="container-contact100">
+        <div class="container-contact100">
+
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form" action="views.user_edit" method="post" >
+			<form class="contact100-form validate-form" action="{% url 'user_edit' %}" method="POST" >
+				{% csrf_token %}
 				<span class="contact100-form-title">
 					Edit your data
 				</span>
 
 				<label class="label-input100" for="first-name">Your Name *</label>
 				<div class="wrap-input100 rs1 validate-input">
-					<input id="first-name" class="input100" type="text" name="first-name" placeholder="First name" value= "{{data.user_first_name }}">
+					<input id="first_name" class="input100" type="text" name="first_name" placeholder="First name" value= "{{data.user_first_name }}">
 					<span class="focus-input100"></span>
 				</div>
 				<div class="wrap-input100 rs1 validate-input">
-					<input class="input100" type="text" name="last-name" placeholder="Last name" value="{{data.user_last_name }}">
+					<input id="last-name" class="input100" type="text" name="last_name" placeholder="Last name" value="{{data.user_last_name }}">
 					<span class="focus-input100"></span>
 				</div>
 
 				<label class="label-input100" for="email">Email Address *</label>
 				<div class="wrap-input100 validate-input">
-					<input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com" value="{{data.user_email_address}}">
+<!--					<input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com" value="{{data.user_email_address}}">-->
+					     <p class="input100">{{data.user_email_address}}</p>
 					<span class="focus-input100"></span>
 				</div>
 
 				<label class="label-input100" for="phone">Phone Number</label>
 				<div class="wrap-input100">
-					<input id="phone" class="input100" type="text" name="phone" placeholder="Eg. +1 800 000000" value="{{data.phone}}">
+					<input id="phone" class="input100" type="text" name="phone_number" placeholder="Eg. +1 800 000000" value="{{data.user_phone_number}}">
 					<span class="focus-input100"></span>
 				</div>
 
 				<label class="label-input100" for="birth_date"> birth_date:</label>
 				<div class="wrap-input100">
-					<input id="birth_date" class="input100" type="text" name="country" placeholder="dd/m/yy" value="{{data.birth_date}}">
+					<input id="birth_date" class="input100" type="text" name="birth_date" placeholder="dd/m/yy" value="{{data.user_birthDate}}">
 					<span class="focus-input100"></span>
 				</div>
 
 
 				<label class="label-input100" for="country"> Country</label>
 				<div class="wrap-input100">
-					<input id="country" class="input100" type="text" name="country" placeholder="Egypt" value="{{data.country}}">
+					<input id="country" class="input100" type="text" name="country" placeholder="Egypt" value="{{data.user_country}}">
 					<span class="focus-input100"></span>
 				</div>
 
@@ -73,6 +63,7 @@
 					</button>
 				</div>
 			</form>
+
 		</div>
 	</div>
 
@@ -86,9 +77,11 @@
   gtag('config', 'UA-23581568-13');
 </script>
 
-</body>
-</html>
+</section>
 
-    </section>
 {% endblock %}
+
+
+
+
 

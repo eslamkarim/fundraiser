@@ -66,13 +66,16 @@
                                             <i class="fa fa-user"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">  {{ user.user_first_name }}{{ user.user_last_name }}</a> </i>
                                             <ul class="dropdown-menu">
                                                 <li class="nav-item">
-                                                    <a class="nav-link" href="#">Profile</a>
+                                                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="{% url 'create' %}">Create Project</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="{% url 'sign_out' %}">Sign out</a>
+                                                </li>
+												 <li class="nav-item">
+                                                    <a class="nav-link" href="{% url 'edit' %}">Edit profile</a>
                                                 </li>
                                             </ul>
                                         </li>
