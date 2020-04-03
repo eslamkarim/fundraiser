@@ -3,7 +3,7 @@ import smtplib
 import re
 from django.shortcuts import render
 from django.views.decorators.csrf import ensure_csrf_cookie
-from .models import User
+from .models import Profile
 
 
 def home(request):
@@ -160,7 +160,7 @@ def sign_up(request):
 
             validation_code = send_sign_up_validation_email(user_full_name, email_address)
             if validation_code > 0:
-                user_instance = User(user_first_name=first_name,
+                user_instance = Profile(user_first_name=first_name,
                                      user_last_name=last_name,
                                      user_email_address=email_address,
                                      user_password=password,
@@ -181,7 +181,7 @@ def sign_in(request):
             email = request.POST.get('email')
             password = request.POST.get('pass')
             try:
-                logged_user = User.objects.get(user_email_address=email, user_password=password)
+                logged_user = Profile.objects.get(user_email_address=email, user_password=password)
                 if logged_user.is_verified_user:
                     request.session['logged_in_user'] = logged_user.user_id
                     return render(request, 'home/home.html')
@@ -206,9 +206,9 @@ def code_validation(request):
         if request.POST.get('sign_up_code'):
             user_code = request.POST.get('sign_up_code')
             try:
-                is_code_exist = User.objects.get(verification_code=user_code)
+                is_code_exist = Profile.objects.get(verification_code=user_code)
                 if is_code_exist:
-                    User.objects.filter(verification_code=user_code, is_verified_user=False).update(
+                    Profile.objects.filter(verification_code=user_code, is_verified_user=False).update(
                         is_verified_user=True)
                     return render(request, 'home/home.html')
                 else:
@@ -221,7 +221,7 @@ def code_validation(request):
 def is_email_exist(email):
     if email:
         try:
-            is_exist = User.objects.get(user_email_address=email)
+            is_exist = Profile.objects.get(user_email_address=email)
             if is_exist:
                 return is_exist
             else:
@@ -260,7 +260,7 @@ def update_password(request):
             is_valid_password = check_password(password, conf_password)
             if is_valid_password:
                 try:
-                    User.objects.filter(user_id=user_id).update(user_password=password)
+                    Profile.objects.filter(user_id=user_id).update(user_password=password)
                     return render(request, 'user/updated_password_confirmation.html')
                 except:
                     return render(request, 'user/error_updating_password.html')
