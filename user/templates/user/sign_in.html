@@ -42,7 +42,7 @@
 						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 					</div>
-
+					
 					<div class="wrap-input100 validate-input m-b-20" data-validate = "Please enter password">
 						<span class="btn-show-pass">
 							<i class="fa fa fa-eye"></i>
@@ -50,7 +50,7 @@
 						<input class="input100" type="password" name="pass" placeholder="Password">
 						<span class="focus-input100"></span>
 					</div>
-
+					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Login
@@ -64,7 +64,8 @@
 							Use facebook
 						</span>
 						<button class="btn mb-2">
-							<a href="{% url 'social:begin' 'facebook' %}">Login with Facebook
+							<a href="{% url 'social:begin' 'facebook' %}"  class="loginBtn loginBtn--facebook">
+								login with facebook
 							</a>
 						</button>
 					</div>
@@ -72,7 +73,7 @@
 						<span class="txt2 p-b-10">
 							Don’t have an account?
 						</span>
-
+						
 						<a href="signup" class="txt3 bo1 hov1">
 							Sign up now
 						</a>
@@ -102,6 +103,8 @@
 	<script src="../../../static/js/login.js"></script>
 <!--===============================================================================================-->
 	<script src="../../../static/js/sign_in_validator"></script>
+
+			
 </body>
 </html>
 {% endblock %}
