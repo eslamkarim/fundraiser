@@ -129,7 +129,7 @@ def check_password(password, conf_password):
 
 def check_email(email_address):
     matcher = re.search(
-        '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$', email_address)
+        '\w+[.|\w]\w+@\w+[.]\w+[.|\w+]\w+', email_address)
     if matcher:
         return True
     return False
