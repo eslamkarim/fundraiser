@@ -161,17 +161,13 @@ MEDIA_URL = '/media/'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
-
     'django.contrib.auth.backends.ModelBackend',
 )
 
 SOCIAL_AUTH_FACEBOOK_KEY = "3026655430735773"        # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = "9a9ee3118e67a5c6c2a56f4a139268f4"  # App Secret
 
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'socialhome'
-LOGOUT_URL = 'logout'
-LOGOUT_REDIRECT_URL = 'login'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'socialhome'
 SOCIAL_AUTH_USER_MODEL = 'user.Profile'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
