@@ -1,0 +1,17 @@
+ <!-- templates/login.html -->
+
+ {% extends 'social/base.html' %}
+ {% block title %} Sign in {% endblock %}
+ {% block content %}
+ <div class="row">
+     <div class="col-md-8 mx-auto social-container my-2 order-md-1">
+
+         <button class="btn mb-2">
+             <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook
+             </a>
+         </button>
+
+     </div>
+ </div>
+ </div>
+ {% endblock %}

@@ -228,19 +228,21 @@ def code_validation(request):
             try:
 
                 is_code_exist = Profile.objects.get(
-                    verification_code=int(user_code))
+                    verification_code=user_code)
                 print(is_code_exist)
                 if is_code_exist:
 
                     Profile.objects.filter(verification_code=user_code, is_verified_user=False).update(
                         is_verified_user=True)
 
-                    return render(request, 'user/valid_code.html')
+                    return redirect('sign_in')
                 else:
                     return render(request, 'user/invalid_code.html')
             except:
 
                 return redirect("/")
+        else:
+            return render(request, 'user/invalid_login.html')
     return redirect("/")
 
 

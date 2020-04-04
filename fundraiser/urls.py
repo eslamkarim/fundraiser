@@ -19,6 +19,8 @@ from django.urls import path,include
 from . import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.auth import views as auth_views
+from social import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +30,10 @@ urlpatterns = [
     path('user/', include("user.urls")),
     path('profile/', include('user_profile.urls') ),
     path('profile/edit/', include('edit_profile.urls') ),
+
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path('social-auth/', include('social_django.urls', namespace="social")),
+    path("social", views.home, name="socialhome"),
 ]
 
  
