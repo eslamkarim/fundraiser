@@ -155,7 +155,6 @@ def sign_up(request):
         last_name = request.POST.get("last_name")
         phone_number = request.POST.get("phone_number")
         email_address = request.POST.get("email")
-        birthday = request.POST.get("birthday")
         password = request.POST.get("password")
         conf_password = request.POST.get("conf_password")
 
@@ -163,15 +162,7 @@ def sign_up(request):
         if (check_first_last_names(first_name, last_name)) and \
                 (check_phone(phone_number)) and (check_email(email_address)) and \
                 (check_password(password, conf_password)):
-            user = {
-                'first_name': first_name,
-                'last_name': last_name,
-                'phone_number': phone_number,
-                'email_address': email_address,
-                'password': password,
-                'conf_password': conf_password
-            }
-
+            
             validation_code = send_sign_up_validation_email(
                 user_full_name, email_address)
             if validation_code:
@@ -179,7 +170,6 @@ def sign_up(request):
                                         user_last_name=last_name,
                                         user_email_address=email_address,
                                         user_password=password,
-                                        user_birthDate=birthday,
                                         user_phone_number=phone_number,
                                         verification_code=validation_code)
                 user_instance.save()
