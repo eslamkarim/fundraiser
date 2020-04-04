@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'mathfilters',
     'user',
     'edit_profile',
+    'social_django',
+    'social',
+    'sslserver'
 
 ]
 
@@ -55,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'fundraiser.urls'
@@ -73,6 +77,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'project.views.returnCurrentUser',
+                'social_django.context_processors.backends',  # <--
+                'social_django.context_processors.login_redirect', # <--
             ],
         },
     },
@@ -89,7 +95,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fundraiser',
         'USER': 'root',
-        'PASSWORD': "",
+        'PASSWORD': "123456",
         'HOST': "",
         'PORT': "",
     }}
@@ -151,3 +157,24 @@ MESSAGE_TAGS = {
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_FACEBOOK_KEY = "3026655430735773"        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = "9a9ee3118e67a5c6c2a56f4a139268f4"  # App Secret
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'socialhome'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
+SOCIAL_AUTH_USER_MODEL = 'user.Profile'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email', 
+}
+SOCIAL_AUTH_USER_FIELDS = ['email','first_name','username','last_name']
