@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from project.models import Project_data, Category, project_tags,  Project_pics
 from user.models import Profile
 import re
-from datetime import datetime
+import datetime
 
 def check_phone(mobile_phone):
     matcher = re.search('^(010|011|015|012)([0-9]{8})', mobile_phone)
@@ -53,7 +53,7 @@ def user_edit(request):
             if check_phone(phone_number):
                 dict['user_phone_number'] = phone_number
             birth_date=request.POST.get("birth_date")
-            if  check_empty(birth_date):
+            if  check_empty(birth_date) and datetime.datetime.strptime(birth_date, "%Y-%m-%d").date() < datetime.date.today():
                 dict['user_birthDate'] = birth_date
             country= request.POST.get('country')
             if check_empty(country):

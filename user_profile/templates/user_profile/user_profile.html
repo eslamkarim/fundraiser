@@ -44,8 +44,12 @@
 				<label class="label-input100" > country :</label>
 					<p class="input100"> {{data.user_country}}</p>
 
-				<label class="label-input100" > birth_date :</label>
-					<p class="input100"> {{data.user_birthDate}}</p>
+        <label class="label-input100" > birth_date :</label>
+          {% if data.user_birthDate == None %}
+            <p class="input100"> </p>
+          {% else %}
+            <p class="input100"> {{data.user_birthDate}}</p>
+          {% endif %}
 
 			</form>
 <!--		</div>-->
