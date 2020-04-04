@@ -136,7 +136,7 @@ def check_email(email_address):
 
 
 def check_phone(mobile_phone):
-    matcher = re.search('^(010|011|015|012)([0-9]{8})', mobile_phone)
+    matcher = re.search('^(010|011|015|012)([0-9]{8}$)', mobile_phone)
     if matcher:
         return True
     return False
