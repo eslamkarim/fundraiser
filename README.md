@@ -1,17 +1,28 @@
 # fundraiser
 
-One Paragraph of project description goes here
+a fund raising website allows users to contribute to projects
 
-## Getting Started
+## To run the website
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
+-make a python environment
+```
+Run pip install -r requirments
+```
+- Make a database called fundraiser
+```
+Run python manage.py migrate user
+then run python manage.py migrate
+```
+- Run the server with
+```
+python manage.py runsslserver --certificate localhost.cert --key localhost.key localhost:8000
+```
 ### Prerequisites
 
-What things you need to install the software and how to install them
+python 3.8
 
 ```
-Give examples
+python, Django
 ```
 
 ### Installing
