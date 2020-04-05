@@ -3,10 +3,7 @@
 a fund raising website allows users to contribute to projects
 
 ## To run the website
-```
-https://18.130.137.29:8000/
-```
-OR
+
 -make a python environment
 ```
 Run pip install -r requirments

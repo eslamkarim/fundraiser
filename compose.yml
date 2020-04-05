@@ -1,0 +1,21 @@
+version: '3'
+services:
+  fundraiser_db:
+    image: mysql:5.7
+    environment:   # Set up mysql database name and password
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: "fundraiser"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "123456"
+    container_name: fundraiser_db
+    ports:
+            - "3306:3306"
+
+  fundraiser:
+    image: eslamkarim/fundraiseriti
+    ports:
+            - "8000:8000"
+    depends_on:
+            - fundraiser_db
+    command: python manage.py runsslserver --certificate localhost.cert --key localhost.key 0.0.0.0:8000
+    container_name: fundraiser
