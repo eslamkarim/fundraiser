@@ -93,11 +93,11 @@ WSGI_APPLICATION = 'fundraiser.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fundraiser',
-        'USER': 'root',
-        'PASSWORD': "",
-        'HOST': "",
-        'PORT': "",
+        'NAME': os.environ['DATABASE_NAME'],
+        'USER': os.environ['DATABASE_USER'],
+        'PASSWORD': os.environ['DATABASE_PASSWORD'],
+        'HOST': os.environ['DATABASE_HOST'],
+        'PORT': os.environ['DATABASE_POPRT'],
     }}
 
 # Password validation
